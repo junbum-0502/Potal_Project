@@ -11,6 +11,5 @@ public interface BookService {
 	List<Book> selectBookByTitle(String title);
 	List<Book> selectBookByAuthor(String author);
 	List<Book> selectBookByPublisher(String publisher);
-	List<Book> selectBookByOpenDate(Date date);
 	
 }

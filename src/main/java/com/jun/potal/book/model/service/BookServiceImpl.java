@@ -1,6 +1,5 @@
 package com.jun.potal.book.model.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.jun.potal.vo.Book;
@@ -27,10 +26,6 @@ public class BookServiceImpl implements BookService{
 		return null;
 	}
 
-	@Override
-	public List<Book> selectBookByOpenDate(Date date) {
-		return null;
-	}
 
 
 
