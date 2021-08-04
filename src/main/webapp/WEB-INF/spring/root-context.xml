@@ -3,9 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- 서버 기반 설정이 될 Root Context 등록 -->
@@ -18,19 +20,22 @@
 		<property name="username" value="potal" />
 		<property name="password" value="1234" />
 	</bean>
-	<bean id="transactionManager"
-		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource" />
+	
+ 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
+		 <property name="configLocation" value="classpath:mybatis-config.xml" />
+		 <property name="dataSource" ref="dataSource"/>
 	</bean>
-	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="configLocation"
-			value="classpath:mybatis-config.xml" />
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+	
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSession" />
-	</bean> <!-- Transaction 시점 등록 -->
+	<constructor-arg ref="sqlSession" />
+	</bean> 
+	 
+	 <!-- TransactionManager를 정의해서 commit, rollback를 제어한다. -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	 
+	<!-- Transaction 시점 등록 -->
 	<tx:advice id="txAdvice"
 		transaction-manager="transactionManager">
 		<tx:attributes>
@@ -41,13 +46,4 @@
 			<tx:method name="delete*" rollback-for="Exception" />
 		</tx:attributes>
 	</tx:advice>
-	<tx:annotation-driven />
-
-	<!-- Transaction 관련된 AOP 설정 -->
-	<aop:config proxy-target-class="true">
-		<aop:pointcut id="daoMethod"
-			expression="execution(* com.kh.testMySpring..*Impl.*(..)))" />
-		<aop:advisor id="transactionAdvisor"
-			pointcut-ref="daoMethod" advice-ref="txAdvice" />
-	</aop:config>
 </beans>
