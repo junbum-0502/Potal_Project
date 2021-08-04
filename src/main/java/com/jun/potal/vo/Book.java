@@ -5,12 +5,14 @@ import java.util.Date;
 public class Book {
 
 	private int bIdx;
+	private String isbn;
+	private char category;
 	private String title;
 	private String author;
-	private String publisher;
-	private Date open_date;
-	private int cnt;
-	private int isLoan;
+	private String info;
+	private int book_amt;
+	private Date reg_date;
+	private int rent_cnt;
 	
 	public Book() {
 		
@@ -22,6 +24,22 @@ public class Book {
 
 	public void setbIdx(int bIdx) {
 		this.bIdx = bIdx;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public char getCategory() {
+		return category;
+	}
+
+	public void setCategory(char category) {
+		this.category = category;
 	}
 
 	public String getTitle() {
@@ -40,43 +58,46 @@ public class Book {
 		this.author = author;
 	}
 
-	public String getPublisher() {
-		return publisher;
+	public String getInfo() {
+		return info;
 	}
 
-	public void setPublisher(String publisher) {
-		this.publisher = publisher;
+	public void setInfo(String info) {
+		this.info = info;
 	}
 
-	public Date getOpen_date() {
-		return open_date;
+	public int getBook_amt() {
+		return book_amt;
 	}
 
-	public void setOpen_date(Date open_date) {
-		this.open_date = open_date;
+	public void setBook_amt(int book_amt) {
+		this.book_amt = book_amt;
 	}
 
-	public int getCnt() {
-		return cnt;
+	public Date getReg_date() {
+		return reg_date;
 	}
 
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
+	public void setReg_date(Date reg_date) {
+		this.reg_date = reg_date;
 	}
 
-	public int getIsLoan() {
-		return isLoan;
+	public int getRent_cnt() {
+		return rent_cnt;
 	}
 
-	public void setIsLoan(int isLoan) {
-		this.isLoan = isLoan;
+	public void setRent_cnt(int rent_cnt) {
+		this.rent_cnt = rent_cnt;
 	}
 
 	@Override
 	public String toString() {
-		return "Book [bIdx=" + bIdx + ", title=" + title + ", author=" + author + ", publisher=" + publisher
-				+ ", open_date=" + open_date + ", cnt=" + cnt + ", isLoan=" + isLoan + "]";
+		return "Book [bIdx=" + bIdx + ", isbn=" + isbn + ", category=" + category + ", title=" + title + ", author="
+				+ author + ", info=" + info + ", book_amt=" + book_amt + ", reg_date=" + reg_date + ", rent_cnt="
+				+ rent_cnt + "]";
 	}
+
+	
 	
 	
 	

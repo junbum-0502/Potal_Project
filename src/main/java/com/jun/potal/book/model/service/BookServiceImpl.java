@@ -21,11 +21,6 @@ public class BookServiceImpl implements BookService{
 		return null;
 	}
 
-	@Override
-	public List<Book> selectBookByPublisher(String publisher) {
-		return null;
-	}
-
 
 
 
