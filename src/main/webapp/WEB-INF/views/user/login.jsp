@@ -11,15 +11,22 @@
 <script>
 
 
-
 </script>
 </head>
 <body>
 <c:if test="${empty login }">
 	<form method="POST" action="loginCheck" id="loginForm">
 		아이디 <input type="text" name="id"><br>
-		비밀번호 <input type="password" name="pwd">
+		비밀번호 <input type="password" name="pwd"><br>
 		<input type="submit" value="로그인">
+	</form>
+	<form method="GET" action="findIndex">
+		<input type="submit" value="아이디 찾기" id="btnId">
+		<input type="hidden" value="id" name="id">
+	</form>
+	<form method="GET" action="findIndex">
+		<input type="submit" value="비밀번호 찾기" id="btnPwd">
+		<input type="hidden" value="pwd" name="pwd">
 	</form>
 </c:if>
 <c:if test="${!empty login }">

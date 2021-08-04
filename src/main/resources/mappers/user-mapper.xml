@@ -24,4 +24,12 @@
 	<select id="login" resultMap="user">
 		SELECT * FROM USERS WHERE USER_ID = #{userId} AND PASSWORD = #{password}
 	</select>
+	
+	<select id="findId" resultMap="user">
+		SELECT * FROM USERS WHERE NAME = #{name} AND BIRTH = #{birth}
+	</select>
+	
+	<select id="findPwd" resultMap="user">
+		SELECT * FROM USERS WHERE USER_ID = #{userId} AND NAME = #{name} AND PHONE = #{phone}
+	</select>
 </mapper>

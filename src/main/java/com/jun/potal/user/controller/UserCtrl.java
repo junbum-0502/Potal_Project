@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jun.potal.user.service.UserService;
 import com.jun.potal.vo.User;
 
@@ -27,19 +29,13 @@ public class UserCtrl {
 	@Autowired
 	private UserService adService;
 	
-	@GetMapping("ready")
-	public String ready() {
-		
-		return "user/ready";
-	}
-	
-	@GetMapping("login")
+	@GetMapping("login") // 로그인 페이지 연결
 	public String login() throws Exception {
 	
 		return "user/login";
 	}
 	
-	@PostMapping("loginCheck")
+	@PostMapping("loginCheck") // 로그인
 	@ResponseBody
 	public void loginCheck(User user, HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
 		
@@ -72,11 +68,65 @@ public class UserCtrl {
 		}
 	}
 	
-	@GetMapping("logout")
+	@GetMapping("logout") // 로그아웃
 	public String logout(HttpSession session) {
 		
 		session.invalidate();
 		return "index/index";
+	}
+	
+	@GetMapping("findIndex") // 아이디, 비밀번호 찾기 페이지 연결
+	public String findIndex(HttpServletRequest request, Model model) {
+		
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		System.out.println("id : " + id);
+		System.out.println("pwd : " + pwd);
+		
+		if (id == null) { // 비밀번호 찾기
+			model.addAttribute("pwd", pwd);
+		} else if (pwd == null) { // 아이디 찾기
+			model.addAttribute("id", id);
+		}
+		
+		return "user/findInfo";
+	}
+	
+	@PostMapping("findInfo")
+	@ResponseBody
+	public String findInfo(HttpServletRequest request, User user, Model model) throws Exception {
+		
+		String name = request.getParameter("name");
+		String birth = request.getParameter("birth");
+		String id = request.getParameter("id");
+		String phone = request.getParameter("phone");
+		System.out.println("birth : " + birth);
+		System.out.println("name : " + name);
+		System.out.println("id : " + id);
+		System.out.println("phone : " + phone);
+		
+		if (phone == null) { // 아이디 찾기
+			user.setName(name);
+			user.setBirth(birth);
+			List<User> findId = adService.findId(user);
+			System.out.println("findId : " + findId);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(findId);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (birth == null) { // 비밀번호 찾기
+			user.setUserId(Integer.valueOf(id));
+			user.setName(name);
+			user.setPhone(phone);
+			List<User> findPwd = adService.findPwd(user);
+			System.out.println("findPwd : " + findPwd);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(findPwd);
+			System.out.println("jsonOutput : "+ jsonOutput);	
+			return jsonOutput;
+		}
+		
+		return "user/findInfo";
 	}
 	
 }
