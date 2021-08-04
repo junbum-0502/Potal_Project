@@ -17,4 +17,8 @@ public class UserDao {
 	public List<User> selectUser(User user) throws Exception {
 		return sqlSession.selectList("User.selectUser", user);
 	}
+	
+	public List<User> login(User user) throws Exception {
+		return sqlSession.selectList("User.login", user);
+	}
 }
