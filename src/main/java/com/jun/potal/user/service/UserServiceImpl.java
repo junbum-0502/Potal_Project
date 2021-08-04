@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService {
 		return uDao.selectUser(user);
 	}
 	
+	@Override
+	public List<User> login(User user) throws Exception {
+		return uDao.login(user);
+	}
+	
 }
