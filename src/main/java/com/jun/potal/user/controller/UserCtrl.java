@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jun.potal.user.service.UserService;
+import com.jun.potal.vo.Book;
 import com.jun.potal.vo.User;
 
 @Controller
@@ -31,7 +32,6 @@ public class UserCtrl {
 	
 	@GetMapping("login") // 로그인 페이지 연결
 	public String login() throws Exception {
-	
 		return "user/login";
 	}
 	
@@ -69,8 +69,7 @@ public class UserCtrl {
 	}
 	
 	@GetMapping("logout") // 로그아웃
-	public String logout(HttpSession session) {
-		
+	public String logout(HttpSession session) {	
 		session.invalidate();
 		return "index/index";
 	}
@@ -128,5 +127,62 @@ public class UserCtrl {
 		
 		return "user/findInfo";
 	}
+	
+	@GetMapping("myPageIndex") // 마이페이지 연결
+	public String myPageIndex() {
+		System.out.println("마이페이지 진입!");
+		return "user/myPage";
+	}
+	
+	@PostMapping("updateInfo") // 회원 정보 변경
+	public String updateInfo(HttpServletRequest request, User user, Model model) throws Exception {
+		
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
+		String email = request.getParameter("email");
+		String phone = request.getParameter("phone");
+		System.out.println("아이디 : " + id);
+		System.out.println("비밀번호 : " + pwd);
+		System.out.println("이메일 : " + email);
+		System.out.println("핸드폰 번호 : " + phone);
+		
+		if (pwd != null) { // 비밀번호 변경
+			user.setUserId(Integer.valueOf(id));
+			user.setPassword(pwd);
+			int updatePwd = adService.updatePwd(user);
+			System.out.println("변경 상태 : " + updatePwd);
+			if (updatePwd != 0) {
+				System.out.println("변경 완료");
+				model.addAttribute("updatePwd", updatePwd);
+			} else {
+				System.out.println("변경 실패");
+			}
+		} else if (email != null) { // 이메일 변경
+			user.setUserId(Integer.valueOf(id));
+			user.setEmail(email);
+			int updateEmail = adService.updateEmail(user);
+			System.out.println("변경 상태 : " + updateEmail);
+			if (updateEmail != 0) {
+				System.out.println("변경 완료");
+				model.addAttribute("updateEmail", updateEmail);
+			} else {
+				System.out.println("변경 실패");
+			}
+		} else if (phone != null) { // 핸드폰 번호 변경
+			user.setUserId(Integer.valueOf(id));
+			user.setPhone(phone);
+			int updatePhone = adService.updatePhone(user);
+			System.out.println("변경 상태 : " + updatePhone);
+			if (updatePhone != 0) {
+				System.out.println("변경 완료");
+				model.addAttribute("updatePhone", updatePhone);
+			} else {
+				System.out.println("변경 실패");
+			}
+		}
+		
+		return "user/myPage";
+	}
+	
 	
 }

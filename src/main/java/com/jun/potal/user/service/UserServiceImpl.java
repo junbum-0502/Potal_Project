@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.jun.potal.user.dao.UserDao;
+import com.jun.potal.vo.Book;
 import com.jun.potal.vo.User;
 
 @Service("adService")
@@ -15,11 +16,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserDao uDao;
-	
-	@Override
-	public List<User> selectUser(User user) throws Exception {
-		return uDao.selectUser(user);
-	}
 	
 	@Override
 	public List<User> login(User user) throws Exception { // 로그인
@@ -36,4 +32,20 @@ public class UserServiceImpl implements UserService {
 		return uDao.findPwd(user);
 	}
 	
+	@Override
+	public int updatePwd(User user) throws Exception { // 비밀번호 변경
+		return uDao.updatePwd(user);
+	}
+	
+	@Override
+	public int updateEmail(User user) throws Exception { // 이메일 변경
+		return uDao.updateEmail(user);
+	}
+	
+	@Override
+	public int updatePhone(User user) throws Exception { // 핸드폰 번호 변경
+		return uDao.updatePhone(user);
+	}
+	
+
 }
