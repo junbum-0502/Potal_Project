@@ -10,7 +10,7 @@
 	<div class="book_div">
 
 		<c:forEach var="book" items="${bList}" varStatus="status">
-			${book.BOOK_AMT }
+			${book.TITLE }
 		</c:forEach>
 	
 	</div>
