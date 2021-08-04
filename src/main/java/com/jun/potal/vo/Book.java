@@ -10,9 +10,9 @@ public class Book {
 	private String title;
 	private String author;
 	private String info;
-	private int book_amt;
-	private Date reg_date;
-	private int rent_cnt;
+	private int bookAmt;
+	private Date regDate;
+	private int rentCnt;
 	
 	public Book() {
 		
@@ -67,34 +67,34 @@ public class Book {
 	}
 
 	public int getBook_amt() {
-		return book_amt;
+		return bookAmt;
 	}
 
 	public void setBook_amt(int book_amt) {
-		this.book_amt = book_amt;
+		this.bookAmt = book_amt;
 	}
 
 	public Date getReg_date() {
-		return reg_date;
+		return regDate;
 	}
 
 	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
+		this.regDate = reg_date;
 	}
 
 	public int getRent_cnt() {
-		return rent_cnt;
+		return rentCnt;
 	}
 
 	public void setRent_cnt(int rent_cnt) {
-		this.rent_cnt = rent_cnt;
+		this.rentCnt = rent_cnt;
 	}
 
 	@Override
 	public String toString() {
 		return "Book [bIdx=" + bIdx + ", isbn=" + isbn + ", category=" + category + ", title=" + title + ", author="
-				+ author + ", info=" + info + ", book_amt=" + book_amt + ", reg_date=" + reg_date + ", rent_cnt="
-				+ rent_cnt + "]";
+				+ author + ", info=" + info + ", book_amt=" + bookAmt + ", reg_date=" + regDate + ", rent_cnt="
+				+ rentCnt + "]";
 	}
 
 	

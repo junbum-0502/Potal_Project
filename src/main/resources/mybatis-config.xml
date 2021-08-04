@@ -6,9 +6,10 @@
 	</settings>
 	<typeAliases> <!-- 사용하고자 하는 클래스의 별칭을 선언 -->
 		<typeAlias type="com.jun.potal.vo.User" alias="User" />
-	</typeAliases>
+		<typeAlias type="com.jun.potal.vo.Book" alias="Book" />
+	</typeAliases>	
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/user-mapper.xml" />
+		<mapper resource="mappers/book-mapper.xml" />
 	</mappers>
-
 </configuration>
