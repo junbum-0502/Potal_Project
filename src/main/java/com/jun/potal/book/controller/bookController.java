@@ -72,12 +72,17 @@ public class bookController {
 		
 		/* int userId=456; */
 		/* book.setbIdx(userId); */
+		
 		String a = request.getParameter("rUid");
 		int userId = Integer.parseInt(a);
+
 		System.out.println(userId);
-		List<Rent> rList = new ArrayList<Rent>();		
-		rList = bookService.selectRentHis(book.getbIdx());
-		model.addAttribute("rList",rList);
+		book.setbIdx(userId);
+		
+		 List<Rent> rList = new ArrayList<Rent>();
+		 rList =bookService.selectRentHis(book.getbIdx()); 
+		 model.addAttribute("rList",rList);
+		 
 		
 		return "book/rentHistory";
 	}
