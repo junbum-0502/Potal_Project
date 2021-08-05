@@ -67,7 +67,7 @@ public class bookController {
 
 		return "redirect:/potal/book";
 	}
-	@PostMapping("rentHistory")
+	@GetMapping("rentHistory")
 	public String selectRentHis(HttpServletRequest request,Book book,Model model, User user) throws Exception{
 		/* int uid = Integer.parseInt(userId); */
 		

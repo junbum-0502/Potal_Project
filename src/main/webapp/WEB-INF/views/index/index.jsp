@@ -132,7 +132,7 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/potal/book">도서 조회/대출</a>
-                        <form method="POST" action="potal/rentHistory" id="rentForm">
+                        <form method="GET" action="potal/rentHistory" id="rentForm">
 	                        <c:forEach var="User" items="${login}" varStatus="status">   
 	                        <input type="hidden" value="${User.userId }" name="userId">  
 	                        <a class="collapse-item" onclick="test();">대출조회</a>         
