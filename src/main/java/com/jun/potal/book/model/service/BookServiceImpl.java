@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jun.potal.book.model.repository.BookDao;
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Rent;
+import com.jun.potal.vo.User;
 
 @Service
 @Repository
@@ -50,8 +51,8 @@ public class BookServiceImpl implements BookService{
 
 
 	@Override
-	public List<Rent> selectRentHis(int userId) throws Exception {
-		return bookDao.selectRentHis(userId);
+	public List<User> selectRentHis(User user) throws Exception {
+		return bookDao.selectRentHis(user);
 	}
 
 

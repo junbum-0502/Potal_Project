@@ -33,8 +33,8 @@ public class BookDao {
 		return sqlSession.update("Book.updateBookAmt",bIdx);
 	}
 	
-	public List<Rent> selectRentHis(int userId) throws Exception{
-		return sqlSession.selectList("Book.selectRentHis",userId);
+	public List<User> selectRentHis(User user) throws Exception{
+		return sqlSession.selectList("Book.selectRentHis",user);
 	}
 	
 }
