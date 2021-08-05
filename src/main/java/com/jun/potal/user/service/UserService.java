@@ -3,6 +3,7 @@ package com.jun.potal.user.service;
 import java.util.List;
 
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.User;
 
 
@@ -20,4 +21,7 @@ public interface UserService {
 	
 	public int updatePhone(User user) throws Exception; // 핸드폰 번호 변경
 
+	public int sendMessage(Message msg) throws Exception; // 메세지 전송
+	
+	public List<Message> readMessage(Message msg) throws Exception; // 메세지 출력
 }

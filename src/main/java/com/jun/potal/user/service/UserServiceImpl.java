@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jun.potal.user.dao.UserDao;
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.User;
 
 @Service("adService")
@@ -47,5 +48,14 @@ public class UserServiceImpl implements UserService {
 		return uDao.updatePhone(user);
 	}
 	
+	@Override
+	public int sendMessage(Message msg) throws Exception { // 메세지 전송
+		return uDao.sendMessage(msg);
+	}
+	
+	@Override
+	public List<Message> readMessage(Message msg) throws Exception { // 메세지 출력
+		return uDao.readMessage(msg);
+	}
 
 }

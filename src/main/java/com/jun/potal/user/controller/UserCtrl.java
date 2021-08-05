@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jun.potal.user.service.UserService;
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.User;
 
 @Controller
@@ -184,5 +185,48 @@ public class UserCtrl {
 		return "user/myPage";
 	}
 	
+	@GetMapping("message") // 메세지 창 진입
+	public String message() {
+		return "user/message";
+	}
 	
+	@PostMapping(value = "readMessage", produces = "application/text; charset=utf8") // 메세지 출력
+	@ResponseBody
+	public String readMessage(HttpServletRequest request, Message msg) throws Exception {
+		
+		String id = request.getParameter("id");
+		System.out.println("id는 : " + id);
+		msg.setUserId(Integer.valueOf(id));
+		
+		// 메세지 출력
+		List<Message> list = adService.readMessage(msg);
+		System.out.println("메세지 리스트 : " + list);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(list);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		return jsonOutput;
+	}
+	
+	@PostMapping(value = "sendMessage", produces = "application/text; charset=utf8") // 메세지 보내기
+	@ResponseBody
+	public String sendMessage(HttpServletRequest request, Message msg) throws Exception {
+		
+			String id = request.getParameter("id");
+			String content = request.getParameter("content");
+			System.out.println("id는 : " + id);
+			System.out.println("content는 : " + content);
+			msg.setUserId(Integer.valueOf(id));
+			msg.setContent(content);
+			// 메세지 전송
+			int Message = adService.sendMessage(msg);
+			System.out.println("메세지 전송 상태 : " + Message);
+			
+			// 메세지 출력
+			List<Message> list = adService.readMessage(msg);
+			System.out.println("메세지 리스트 : " + list);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(list);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+	}
 }

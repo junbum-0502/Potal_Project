@@ -46,4 +46,14 @@
 	<update id="updatePhone">
 		UPDATE USERS SET PHONE = #{phone} WHERE USER_ID = #{userId}
 	</update>
+	
+	<!-- 메세지 전송 -->
+	<insert id="sendMessage">
+		INSERT INTO MESSAGE VALUES (SEQ_MESSAGE.NEXTVAL, #{userId}, 999, SYSDATE, #{content})
+	</insert>
+	
+	<!-- 메세지 출력 -->
+	<select id="readMessage" resultType="map">
+		SELECT * FROM MESSAGE WHERE USER_ID = #{userId} AND R_ID = 999
+	</select>
 </mapper>

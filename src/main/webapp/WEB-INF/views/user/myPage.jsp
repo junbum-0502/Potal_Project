@@ -7,10 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style>
 .intro {
 	color : blue;
 }
+
 </style>
 <script>
 	function testEqual() {
@@ -55,6 +57,19 @@
 			return false;
 		}
 	}
+    window.onload = function () {
+        //새창
+        $("#btn_open").click(fopen);
+        $("#btn_close").click(fclose);
+
+        let opened_win_01 = null;
+        function fopen() {
+            opened_win_01 = window.open("message", "Message", "width=400, height=500, toolbar=yes");
+        }
+        function fclose() {
+            opened_win_01.close();
+        }
+    }
 </script>
 </head>
 <body>
@@ -106,5 +121,7 @@
 		<p class="intro">핸드폰 번호 변경이 완료되었습니다.</p>
 	</c:if>
 </c:forEach>
+<button id="btn_open">새창열기</button>
+<button id="btn_close">열린창닫기</button>
 </body>
 </html>

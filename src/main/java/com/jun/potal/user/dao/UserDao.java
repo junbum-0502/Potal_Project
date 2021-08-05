@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.User;
 
 @Repository("uDao")
@@ -37,6 +38,14 @@ public class UserDao {
 	
 	public int updatePhone(User user) throws Exception { // 핸드폰 번호 변경
 		return sqlSession.update("User.updatePhone", user);
+	}
+	
+	public int sendMessage(Message msg) throws Exception { // 메세지 전송
+		return sqlSession.insert("User.sendMessage", msg);
+	}
+	
+	public List<Message> readMessage(Message msg) throws Exception { // 메세지 출력
+		return sqlSession.selectList("User.readMessage", msg);
 	}
 
 }
