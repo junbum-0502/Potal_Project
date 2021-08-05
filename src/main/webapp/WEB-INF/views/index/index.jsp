@@ -131,9 +131,12 @@
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="potal/book">도서조회</a>
-                        <a class="collapse-item" href="register.html">도서대출</a>
-                        <a class="collapse-item" href="register.html">대출조회</a>
+                        <a class="collapse-item" href="/potal/book">도서 조회/대출</a>
+                        <c:forEach var="User" items="${login}" varStatus="status">
+                        <input type="hidden" value="${User.userId}" name="rUid" id="rUid">       
+                        <a class="collapse-item" onclick="test()" href="/potal/rentHistory?userId=${User.userId }">대출조회</a>            
+                        </c:forEach>
+                      
                     </div>
                 </div>
             </li>
@@ -822,5 +825,11 @@
 
 </body>
 <script>
+
+	function test() {
+		var a = document.getElementById("rUid");
+		console.log(a);
+	}
+
 </script>
 </html>

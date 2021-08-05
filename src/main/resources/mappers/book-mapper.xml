@@ -14,9 +14,26 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="rentCnt" column="rent_cnt"/>
 	</resultMap>
+
 	
 	<select id="selectBook" resultType="map">
 	SELECT * FROM BOOK
+	</select>
+
+	<select id="selectBookByBidx" resultType="map">
+	SELECT * FROM BOOK WHERE B_IDX = #{BIDX}
+	</select>
+	
+	<insert id="insertRentData">
+	INSERT INTO RENT(R_IDX,USER_ID,B_IDX,ALLOW,RETURN) VALUES(SC_RENT_DATA.NEXTVAL,#{bookAmt},#{bIdx},0,SYSDATE+7)
+	</insert>
+
+	<update id="updateBookAmt">
+	UPDATE BOOK SET BOOK_AMT = (BOOK_AMT-1) WHERE B_IDX = #{BIDX} AND BOOK_AMT > 0
+	</update>
+	
+	<select id="selectRentHis" resultType="map">
+	SELECT * FROM RENT WHERE USER_ID = #{BIDX}
 	</select>
 
 </mapper>

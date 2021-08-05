@@ -10,7 +10,9 @@
 	<div class="book_div">
 
 		<c:forEach var="book" items="${bList}" varStatus="status">
-			${book.TITLE }
+			<a href="/potal/bookInfo?bIdx=${book.B_IDX}">${book.TITLE }</a>
+			<hr>
+
 		</c:forEach>
 	
 	</div>

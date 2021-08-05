@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.jun.potal.book.model.repository.BookDao;
-import com.jun.potal.book.model.repository.BookRepository;
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Rent;
 
 @Service
 @Repository
@@ -27,6 +27,31 @@ public class BookServiceImpl implements BookService{
 		 * HashMap<String, Object>(); commandMap.put("bList", book); return commandMap;
 		 */
 		return bookDao.selectBook();
+	}
+
+
+	@Override
+	public List<Book> selectBookByBidx(String bIdx) throws Exception {
+		
+		return bookDao.selectBookByBidx(bIdx);
+	}
+
+
+	@Override
+	public int updateBookAmt(int bIdx) throws Exception {
+		return bookDao.updateBookAmt(bIdx);
+	}
+
+
+	@Override
+	public int insertRentData(Book book) throws Exception {
+		return bookDao.insertRentData(book);
+	}
+
+
+	@Override
+	public List<Rent> selectRentHis(int userId) throws Exception {
+		return bookDao.selectRentHis(userId);
 	}
 
 
