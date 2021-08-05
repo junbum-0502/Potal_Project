@@ -153,7 +153,12 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="/potal/book">도서 조회/대출</a>
-                        <a class="collapse-item" href="/potal/rentHistory">대출조회</a>
+                        <form method="GET" action="rentHistory" id="rentForm">
+	                        <c:forEach var="User" items="${login}" varStatus="status">   
+	                        <input type="hidden" value="${User.userId }" name="userId">  
+	                        <a class="collapse-item" onclick="test();">대출조회</a>         
+	                        </c:forEach>                 
+                        </form>
                     </div>
                 </div>
             </li>
@@ -245,7 +250,11 @@
     <!-- Page level custom scripts -->
     <script src="/resources/js/demo/chart-area-demo.js"></script>
     <script src="/resources/js/demo/chart-pie-demo.js"></script>
-
+	<script>
+	function test() {
+		rentForm.submit();
+	}
+	</script>
 </body>
 
 

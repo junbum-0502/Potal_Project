@@ -25,7 +25,7 @@
 	</select>
 	
 	<insert id="insertRentData">
-	INSERT INTO RENT(R_IDX,USER_ID,B_IDX,ALLOW,RETURN_DATA) VALUES(SC_RENT_DATA.NEXTVAL,#{bookAmt},#{bIdx},0,SYSDATE+7)
+	INSERT INTO RENT(R_IDX,USER_ID,B_IDX,ALLOW,RETURN_DATE) VALUES(SC_RENT_DATA.NEXTVAL,#{bookAmt},#{bIdx},0,SYSDATE+7)
 	</insert>
 
 	<update id="updateBookAmt">
