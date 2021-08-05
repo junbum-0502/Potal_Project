@@ -33,7 +33,7 @@
 	</update>
 	
 	<select id="selectRentHis" resultType="map">
-	SELECT * FROM RENT WHERE USER_ID = #{BIDX}
+	SELECT * FROM RENT WHERE USER_ID = #{userId}
 	</select>
 
 </mapper>

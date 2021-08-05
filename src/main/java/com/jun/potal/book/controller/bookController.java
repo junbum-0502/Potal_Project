@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jun.potal.book.model.service.BookService;
@@ -66,17 +67,17 @@ public class bookController {
 
 		return "redirect:/potal/book";
 	}
-	@GetMapping("rentHistory")
-	public String selectRentHis(HttpServletRequest request,Book book,Model model) throws Exception{
+	@PostMapping("rentHistory")
+	public String selectRentHis(HttpServletRequest request,Book book,Model model, User user) throws Exception{
 		/* int uid = Integer.parseInt(userId); */
 		
 		/* int userId=456; */
-		/* book.setbIdx(userId); */
-		String a = request.getParameter("rUid");
-		int userId = Integer.parseInt(a);
+		String userId = request.getParameter("userId");
 		System.out.println(userId);
-		List<Rent> rList = new ArrayList<Rent>();		
-		rList = bookService.selectRentHis(book.getbIdx());
+		user.setUserId(Integer.valueOf(userId));
+		
+		List<User> rList = bookService.selectRentHis(user);
+		System.out.println("rList : " + rList);
 		model.addAttribute("rList",rList);
 		
 		return "book/rentHistory";

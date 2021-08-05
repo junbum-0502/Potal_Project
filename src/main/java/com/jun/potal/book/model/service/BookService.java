@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Rent;
+import com.jun.potal.vo.User;
 
 public interface BookService {
 
@@ -14,6 +15,6 @@ public interface BookService {
 	int updateBookAmt(int bIdx) throws Exception;
 	int insertRentData(Book book) throws Exception;
 	
-	List<Rent> selectRentHis(int UserId) throws Exception;
+	List<User> selectRentHis(User user) throws Exception;
 	
 }

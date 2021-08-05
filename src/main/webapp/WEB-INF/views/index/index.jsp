@@ -132,11 +132,12 @@
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/potal/book">도서 조회/대출</a>
-                        <c:forEach var="User" items="${login}" varStatus="status">
-                        <input type="hidden" value="${User.userId}" name="rUid" id="rUid">       
-                        <a class="collapse-item" onclick="test()" href="/potal/rentHistory?userId=${User.userId }">대출조회</a>            
-                        </c:forEach>
-                      
+                        <form method="POST" action="potal/rentHistory" id="rentForm">
+	                        <c:forEach var="User" items="${login}" varStatus="status">   
+	                        <input type="hidden" value="${User.userId }" name="userId">  
+	                        <a class="collapse-item" onclick="test();">대출조회</a>         
+	                        </c:forEach>                 
+                        </form>
                     </div>
                 </div>
             </li>
@@ -827,8 +828,7 @@
 <script>
 
 	function test() {
-		var a = document.getElementById("rUid");
-		console.log(a);
+		rentForm.submit();
 	}
 
 </script>
