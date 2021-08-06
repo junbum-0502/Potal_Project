@@ -2,16 +2,15 @@ package com.jun.potal.vo;
 
 import java.util.Date;
 
-public class Service {
+public class ServiceHistory {
 
 	private int sIdx;
 	private int userId;
 	private int mId;
 	private int allow;
-	private String type;
 	private Date regDate;
 	
-	public Service() {
+	public ServiceHistory() {
 		
 	}
 
@@ -47,14 +46,6 @@ public class Service {
 		this.allow = allow;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public Date getRegDate() {
 		return regDate;
 	}
@@ -65,7 +56,7 @@ public class Service {
 
 	@Override
 	public String toString() {
-		return "Service [sIdx=" + sIdx + ", userId=" + userId + ", mId=" + mId + ", allow=" + allow + ", type=" + type
+		return "ServiceHistory [sIdx=" + sIdx + ", userId=" + userId + ", mId=" + mId + ", allow=" + allow
 				+ ", regDate=" + regDate + "]";
 	}
 	

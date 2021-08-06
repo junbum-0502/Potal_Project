@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="ServiceType">
+
+	<resultMap type="ServiceType" id="serviceType">
+		<id property="stIdx" column="ST_IDX"/>
+		<result property="info" column="INFO"/>
+	</resultMap>
+
+
+	<select id="selectServiceAll" resultType="map">
+	SELECT * FROM SERVICE_TYPE
+	</select>
+	
+</mapper>

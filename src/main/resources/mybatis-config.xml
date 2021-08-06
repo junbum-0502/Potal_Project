@@ -8,9 +8,11 @@
 		<typeAlias type="com.jun.potal.vo.User" alias="User" />
 		<typeAlias type="com.jun.potal.vo.Book" alias="Book" />
 		<typeAlias type="com.jun.potal.vo.Rent" alias="Rent" />
+		<typeAlias type="com.jun.potal.vo.ServiceType" alias="ServiceType" />
 	</typeAliases>	
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/user-mapper.xml" />
 		<mapper resource="mappers/book-mapper.xml" />
+		<mapper resource="mappers/service-mapper.xml" />
 	</mappers>
 </configuration>
