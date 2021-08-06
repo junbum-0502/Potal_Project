@@ -171,7 +171,7 @@
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">민원 조회/신청</a>
+                        <a class="collapse-item" href="/potal/serviceList">민원 조회/신청</a>
                         <a class="collapse-item" href="register.html">민원신청내역</a>
                     </div>
                 </div>
