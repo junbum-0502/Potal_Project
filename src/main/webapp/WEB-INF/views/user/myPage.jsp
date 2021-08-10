@@ -69,11 +69,84 @@
         function fclose() {
             opened_win_01.close();
         }
+        // 프로필 사진
+        var id = document.getElementById("id").value;
+        $.ajax({
+        	url : "profileImg",
+        	type : "POST",
+        	data : {
+        		id : id
+        	},
+        	success : img,
+        	error : function(error) {
+        		console.log("실패");
+        	}
+        })
+        // 등록금 조회
+        var tuition = document.getElementById("tuition").value;
+        $.ajax({
+        	url : "tuition",
+        	type : "POST",
+        	data : {
+        		tuition : tuition
+        	},
+        	success : info_tuition,
+        	error : function(error) {
+        		console.log("실패");
+        	}
+        })
+        // 장학금 조회
+        $.ajax({
+        	url : "scholarship",
+        	type : "POST",
+        	data : {
+        		id : id
+        	},
+        	success : info_scholarship,
+        	error : function(error) {
+        		console.log("실패");
+        	}
+        })
+    }
+    
+    function img(data) {
+    	var cv = "";
+    	console.log("이미지 업로드");
+    	$.each(data, function(i, list) {
+    		console.log(data[i].SAVE_PATH);
+    		cv += "<input type='image' src='<%=request.getContextPath()%>" + data[i].SAVE_PATH + "'>"
+    	})
+    	$("#profile").append(cv);
+    }
+    
+    function info_tuition(data) {
+    	var cv = "";
+    	console.log("등록금 조회");
+    	$.each(data, function(i, list) {
+    		console.log(data[i].TUITION);
+    		cv += "<p>등록금 : " + data[i].TUITION + " 원</p>"
+    	})
+    	$("#info").append(cv);
+    }
+    
+    function info_scholarship(data) {
+    	var cv = "";
+    	console.log("장학금 조회");
+    	$.each(data, function(i, list) {
+    		console.log(data[i].amount);
+    		cv += "<p>장학금 : " + data[i].amount + " 원</p>"
+    	})
+    	$("#info").append(cv);
     }
 </script>
 </head>
 <body>
 <c:forEach var="info" items="${login }" varStatus="status">
+	<!-- form enctype="multipart/form-data"를 적어줘야 한다. -->
+	<input type="hidden" value="${info.userId }" id="id"> <!-- 학번 -->
+	<input type="hidden" value="${info.mIdx }" id="tuition"> <!-- 학과번호 -->
+	<div id="profile">
+	</div>
 	<c:if test="${info.type eq 1}">
 		학생입니다.
 	</c:if>
@@ -86,6 +159,8 @@
 	<p>이메일 : ${info.email }</p>
 	<p>핸드폰 번호 : ${info.phone }</p>
 	<p>생년월일 : ${info.birth }</p>
+	<div id="info">
+	</div>
 	<p>비밀번호 변경</p>
 	<c:if test="${updatePwd ne 1}">
 		<form method="POST" action="updateInfo" onsubmit="return testEqual();">
@@ -121,7 +196,7 @@
 		<p class="intro">핸드폰 번호 변경이 완료되었습니다.</p>
 	</c:if>
 </c:forEach>
-<button id="btn_open">새창열기</button>
-<button id="btn_close">열린창닫기</button>
+<button id="btn_open">메세지</button>
+<button id="btn_close">메세지닫기</button>
 </body>
 </html>

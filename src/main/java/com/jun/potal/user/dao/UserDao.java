@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Message;
+import com.jun.potal.vo.Scholarship;
 import com.jun.potal.vo.User;
 
 @Repository("uDao")
@@ -46,6 +47,18 @@ public class UserDao {
 	
 	public List<Message> readMessage(Message msg) throws Exception { // 메세지 출력
 		return sqlSession.selectList("User.readMessage", msg);
+	}
+	
+	public List<User> profileImg(User user) throws Exception { // 프로필 사진 업로드
+		return sqlSession.selectList("User.profileImg", user);
+	}
+	
+	public List<User> tuition(User user) throws Exception { // 등록금 조회
+		return sqlSession.selectList("User.tuition", user);
+	}
+	
+	public List<Scholarship> selectSchoalr(Scholarship sch) throws Exception { // 장학금 조회
+		return sqlSession.selectList("User.selectScholar", sch); 
 	}
 
 }

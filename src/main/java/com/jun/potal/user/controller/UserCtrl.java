@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.jun.potal.user.service.UserService;
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Message;
+import com.jun.potal.vo.Scholarship;
 import com.jun.potal.vo.User;
 
 @Controller
@@ -228,5 +229,49 @@ public class UserCtrl {
 			String jsonOutput = gson.toJson(list);
 			System.out.println("jsonOutput : "+ jsonOutput);
 			return jsonOutput;
+	}
+	
+	@PostMapping(value = "profileImg") // 프로필 사진
+	@ResponseBody
+	public List<User> profileImg(HttpServletRequest request, User user) throws Exception { // 프로필 사진 업로드
+		
+		String id = request.getParameter("id");
+		System.out.println("id : " + id);
+		user.setUserId(Integer.valueOf(id));
+		
+		List<User> img = adService.profileImg(user);
+		System.out.println("img : " + img);
+		
+		return img;
+	}
+	
+	@PostMapping(value="tuition")
+	@ResponseBody
+	public List<User> tuition(HttpServletRequest request, User user, Model model) throws Exception { // 등록금 조회
+		
+		String major = request.getParameter("tuition");
+		user.setmIdx(Integer.valueOf(major));
+		
+		List<User> tuition = adService.tuition(user);
+		System.out.println("tuition : " + tuition);
+		model.addAttribute("tuition", tuition);
+		
+		return tuition;
+	}
+	
+	@PostMapping(value="scholarship")
+	@ResponseBody
+	public List<Scholarship> selectScholar(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 조회
+		
+		String id = request.getParameter("id");
+		System.out.println("id : " + id);
+		sch.setUserId(Integer.valueOf(id));
+		System.out.println(sch.getUserId());
+		
+		List<Scholarship> selectScholar = adService.selectScholar(sch);
+		System.out.println("selectScholar : " + selectScholar);
+		
+		return selectScholar;
+		
 	}
 }

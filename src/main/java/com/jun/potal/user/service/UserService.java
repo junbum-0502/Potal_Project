@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Message;
+import com.jun.potal.vo.Scholarship;
 import com.jun.potal.vo.User;
 
 
@@ -24,4 +25,10 @@ public interface UserService {
 	public int sendMessage(Message msg) throws Exception; // 메세지 전송
 	
 	public List<Message> readMessage(Message msg) throws Exception; // 메세지 출력
+	
+	public List<User> profileImg(User user) throws Exception; // 프로필 사진 업로드
+	
+	public List<User> tuition(User user) throws Exception; // 등록금 조회
+
+	public List<Scholarship> selectScholar(Scholarship sch) throws Exception; // 장학금 조회
 }

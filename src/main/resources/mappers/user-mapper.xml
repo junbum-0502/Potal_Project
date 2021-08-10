@@ -16,6 +16,12 @@
 		<result property="sIdx" column="s_idx"/>
 		<result property="pIdx" column="p_idx"/>
 	</resultMap>
+	<resultMap type="Scholarship" id="scholarship">
+		<id property="sIdx" column="s_idx"/>
+		<result property="siIdx" column="si_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="amount" column="amount"/>
+	</resultMap>
 	
 	<!-- 로그인 -->
 	<select id="login" resultMap="user">
@@ -55,5 +61,20 @@
 	<!-- 메세지 출력 -->
 	<select id="readMessage" resultType="map">
 		SELECT * FROM MESSAGE WHERE USER_ID = #{userId} AND R_ID = 999
+	</select>
+	
+	<!-- 프로필 사진 업로드 -->
+	<select id="profileImg" resultType="map">
+		SELECT SAVE_PATH FROM FILES WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 등록금 조회 -->
+	<select id="tuition" resultType="map">
+		SELECT TUITION FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
+	</select>
+	
+	<!-- 장학금 조회 -->
+	<select id="selectScholar" resultType="scholarship">
+		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE USER_ID = #{userId}
 	</select>
 </mapper>
