@@ -15,7 +15,7 @@
     <link href="/resources/css/sb-admin-2.min.css" rel="stylesheet">
    
 </head>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -59,8 +59,20 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="buttons.html">수업시간표</a>
-                        <a class="collapse-item" href="cards.html">교과목 조회</a>
+ 						<c:if test="${empty login }"> <!-- 비로그인 -->
+                       		<a class="collapse-item" onclick="notLog();">수업시간표</a>
+                       	</c:if>
+                        <c:if test="${!empty login }"> <!-- 로그인 -->
+	                    	<form method="POST" action="<%=request.getContextPath()%>/potal/schedule" id="schForm">
+	                        		<a class="collapse-item" onclick="onSubmit();">수업시간표</a>	
+	                        </form>
+                        </c:if>
+   							<c:if test="${empty login }"> <!-- 비로그인 -->
+                        		<a class="collapse-item" href="#">교과목 조회</a>
+                        	</c:if>
+                        	<c:if test="${!empty login }"> <!-- 로그인 -->
+                        		<a class="collapse-item" href="#">교과목 조회</a>
+                        </c:if>
                     </div>
                 </div>
             </li>
@@ -75,8 +87,22 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="utilities-color.html">성적조회 (현학기)</a>
-                        <a class="collapse-item" href="utilities-border.html">성적조회 (전학기)</a>
+   						<c:if test="${empty login }"> <!-- 비로그인 -->
+                      		<a class="collapse-item" onclick="notLog();">성적조회 (현학기)</a>
+                      		<a class="collapse-item" onclick="notLog();">성적조회 (전학기)</a>
+                        </c:if>
+                        <c:if test="${!empty login }"> <!-- 로그인 -->
+                        	<c:forEach var="info" items="${login }" varStatus="status">
+                       			<c:if test="${info.type eq 1 }"> <!-- 학생 -->
+                        			<a class="collapse-item" href="#">성적조회 (현학기)</a>
+                        			<a class="collapse-item" href="#">성적조회 (전학기)</a>
+                        		</c:if>
+                        		<c:if test="${info.type eq 2 }"> <!-- 교수 -->
+                        			<a class="collapse-item" href="#">성적조회 (현학기)</a>
+                        			<a class="collapse-item" href="#">성적조회 (전학기)</a>
+                        		</c:if>
+                        	</c:forEach>
+                        </c:if>
                     </div>
                 </div>
             </li>
@@ -842,6 +868,14 @@
 	function test1() {
 		serForm.submit();
 	}
+	
+	function onSubmit() {
+		console.log("아아");
+		$("#schForm").submit();
+	}
 
+	function notLog() {
+		alert("로그인 해주세요.");
+	}
 </script>
 </html>

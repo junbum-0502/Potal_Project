@@ -77,4 +77,9 @@
 	<select id="selectScholar" resultType="scholarship">
 		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE USER_ID = #{userId}
 	</select>
+	
+	<!-- 시간표 조회 -->
+	<select id="schedule" resultType="map">
+		SELECT * FROM SCHDULE WHERE USER_ID = 123;
+	</select>
 </mapper>

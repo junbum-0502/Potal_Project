@@ -245,7 +245,7 @@ public class UserCtrl {
 		return img;
 	}
 	
-	@PostMapping(value="tuition")
+	@PostMapping(value="tuition") // 등록금
 	@ResponseBody
 	public List<User> tuition(HttpServletRequest request, User user, Model model) throws Exception { // 등록금 조회
 		
@@ -259,7 +259,7 @@ public class UserCtrl {
 		return tuition;
 	}
 	
-	@PostMapping(value="scholarship")
+	@PostMapping(value="scholarship") // 장학금
 	@ResponseBody
 	public List<Scholarship> selectScholar(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 조회
 		
@@ -273,5 +273,14 @@ public class UserCtrl {
 		
 		return selectScholar;
 		
+	}
+	
+	@PostMapping(value = "schedule") // 시간표 페이지
+	public String schedule() {
+		
+		System.out.println("시간표");
+		
+		
+		return "user/schedule";
 	}
 }
