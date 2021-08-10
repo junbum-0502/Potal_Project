@@ -9,6 +9,7 @@ public class ServiceHistory {
 	private int mId;
 	private int allow;
 	private Date regDate;
+	private int stIdx;
 	
 	public ServiceHistory() {
 		
@@ -53,12 +54,22 @@ public class ServiceHistory {
 	public void setRegDate(Date regDate) {
 		this.regDate = regDate;
 	}
+	
+
+	public int getStIdx() {
+		return stIdx;
+	}
+
+	public void setStIdx(int stIdx) {
+		this.stIdx = stIdx;
+	}
 
 	@Override
 	public String toString() {
 		return "ServiceHistory [sIdx=" + sIdx + ", userId=" + userId + ", mId=" + mId + ", allow=" + allow
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", stIdx=" + stIdx + "]";
 	}
+
 	
 	
 	

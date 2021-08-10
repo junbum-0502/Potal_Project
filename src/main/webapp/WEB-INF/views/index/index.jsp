@@ -151,7 +151,15 @@
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="/potal/serviceList">민원 조회/신청</a>
-                        <a class="collapse-item" href="register.html">민원신청내역</a>
+                        
+                        <form method="GET" action="/potal/reqService" id="serForm">
+	                        <c:forEach var="User" items="${login}" varStatus="status">   
+	                        <input type="hidden" value="${User.userId }" name="userId">  
+	                         <a class="collapse-item" onclick="test1();">민원신청내역</a>       
+	                        </c:forEach>                 
+                        </form>
+                        
+                       <!--  <a class="collapse-item" href="/potal/reqService">민원신청내역</a> -->
                     </div>
                 </div>
             </li>
@@ -829,6 +837,10 @@
 
 	function test() {
 		rentForm.submit();
+	}
+	
+	function test1() {
+		serForm.submit();
 	}
 
 </script>

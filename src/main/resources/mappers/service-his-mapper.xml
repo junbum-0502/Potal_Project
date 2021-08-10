@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="ServiceHistory">
+
+	<resultMap type="ServiceHistory" id="serviceHistory">
+		<id property="sIdx" column="s_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="mId" column="m_id"/>
+		<result property="allow" column="allow"/>
+		<result property="regDate" column="regdate"/>
+		<result property="stIdx" column="st_idx"/>
+	</resultMap>
+
+	<insert id="insertServiceHistory">
+	INSERT INTO SERVICE_HISTORY(S_IDX,USER_ID,ALLOW,REGDATE,ST_IDX,M_ID) VALUES(SC_SERVICE_HISTORY.NEXTVAL,#{userId},0,SYSDATE,#{stIdx},'M123')
+	</insert>
+	
+	<select id="selectServiceRequestAll" resultType="map">
+	SELECT USER_ID,ALLOW,REGDATE,INFO FROM SERVICE_HISTORY h INNER JOIN SERVICE_TYPE t ON h.ST_IDX = t.ST_IDX WHERE USER_ID = #{userId}
+	</select>
+
+</mapper>
