@@ -97,8 +97,8 @@
                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         	<c:forEach var="info" items="${login }" varStatus="status">
                        			<c:if test="${info.type eq 1 }"> <!-- 학생 -->
-                        			<a class="collapse-item" href="<%=request.getContextPath()%>/potal/grade?userId=${info.userId }&type=1">성적조회 (현학기)</a>
-                        			<a class="collapse-item" href="<%=request.getContextPath()%>/potal/grade?userId=${info.userId }&type=2">성적조회 (전학기)</a>
+                        			<a class="collapse-item" href="<%=request.getContextPath()%>/potal/gradeIndex?userId=${info.userId }&type=1">성적조회 (현학기)</a>
+                        			<a class="collapse-item" href="<%=request.getContextPath()%>/potal/gradeIndex?userId=${info.userId }&type=2">성적조회 (전학기)</a>
                         		</c:if>
                         		<c:if test="${info.type eq 2 }"> <!-- 교수 -->
                         			<a class="collapse-item" href="/potal/gradeAll?pId=${info.userId}">성적조회 / 성적입력</a>
