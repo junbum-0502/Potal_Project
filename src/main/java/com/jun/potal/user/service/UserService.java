@@ -3,6 +3,7 @@ package com.jun.potal.user.service;
 import java.util.List;
 
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Grade;
 import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.Scholarship;
@@ -34,4 +35,8 @@ public interface UserService {
 	public List<Scholarship> selectScholar(Scholarship sch) throws Exception; // 장학금 조회
 	
 	public List<Schedule> schedule(Schedule sch) throws Exception; // 시간표 조회
+	
+	public List<Grade> grade(Grade grade) throws Exception; // 현학기 성적 조회
+	
+	public List<Grade> gradeAll(Grade grade) throws Exception; // 전학기 성적 조회
 }

@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jun.potal.user.service.UserService;
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Grade;
 import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.Scholarship;
@@ -292,8 +293,8 @@ public class UserCtrl {
 		return "user/schedule";
 	}
 	
-	@GetMapping(value = "grade") // 성적 페이지
-	public String grade(HttpServletRequest request, User user) throws Exception {
+	@GetMapping(value = "gradeIndex") // 성적 페이지
+	public String gradeIndex(HttpServletRequest request, Model model) throws Exception {
 		
 		System.out.println("성적 페이지");
 		String id = request.getParameter("userId");
@@ -302,12 +303,50 @@ public class UserCtrl {
 		System.out.println("type : " + type);
 		if (type.equals("1")) { // 현학기
 			System.out.println("현학기 조회");
+			model.addAttribute("id", id);
+			model.addAttribute("type", type);
 		} else if (type.equals("2")) { // 전학기
 			System.out.println("전학기 조회");
+			model.addAttribute("id", id);
+			model.addAttribute("type", type);
 		} else {
 			System.out.println("값 넘기기 오류");
 		}
 		
 		return "user/grade";
+	}
+	
+	@PostMapping(value = "grade", produces = "application/text; charset=utf8") // 성적 조회
+	@ResponseBody
+	public String grade(HttpServletRequest request, Grade grade) throws Exception {
+		
+		String id = request.getParameter("id");
+		String type = request.getParameter("type");
+		String date = request.getParameter("date");
+		System.out.println("id : " + id);
+		System.out.println("type : " + type);
+		System.out.println("date : " + date);
+		grade.setUserId(Integer.valueOf(id));
+		grade.setYearSemester(date);
+		if (type.equals("1")) {
+			System.out.println("현학기 성적 조회");
+			List<Grade> gradeList = adService.grade(grade);
+			System.out.println("현학기 성적 : " + gradeList);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(gradeList);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else if (type.equals("2")) {
+			System.out.println("전학기 성적 조회");
+			List<Grade> gradeAllList = adService.gradeAll(grade);
+			System.out.println("전학기 성적 : " + gradeAllList);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(gradeAllList);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else {
+			System.out.println("비로그인 상태");
+			return "user/grade";
+		}
 	}
 }

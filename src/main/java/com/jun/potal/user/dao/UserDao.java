@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Grade;
 import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.Scholarship;
@@ -64,6 +65,14 @@ public class UserDao {
 	
 	public List<Schedule> schedule(Schedule sch) throws Exception { // 시간표 조회
 		return sqlSession.selectList("User.schedule", sch);
+	}
+	
+	public List<Grade> grade(Grade grade) throws Exception { // 현학기 성적 조회
+		return sqlSession.selectList("User.grade", grade);
+	}
+	
+	public List<Grade> gradeAll(Grade grade) throws Exception { // 전학기 성적 조회
+		return sqlSession.selectList("User.gradeAll", grade);
 	}
 
 }

@@ -85,7 +85,7 @@
 	
 	<!-- 현학기 성적 조회 -->
 	<select id="grade" resultType="map">
-		SELECT * FROM GRADE WHERE USER_ID = #{userId} AND YEAR_SEMESTER = '2021/08'
+		SELECT * FROM GRADE WHERE USER_ID = #{userId} AND YEAR_SEMESTER = #{yearSemester}
 	</select>
 	
 	<!-- 전학기 성적 조회 -->
