@@ -9,11 +9,12 @@ public class Schedule {
 	private String pName;
 	private String sName;
 	private String classRoom;
+	private int proId;
 	
 	@Override
 	public String toString() {
 		return "Schedule [cIdx=" + cIdx + ", userId=" + userId + ", title=" + title + ", time=" + time + ", pName="
-				+ pName + ", sName=" + sName + ", classRoom=" + classRoom + "]";
+				+ pName + ", sName=" + sName + ", classRoom=" + classRoom + ", proId=" + proId + "]";
 	}
 
 	public int getcIdx() {
@@ -71,6 +72,16 @@ public class Schedule {
 	public void setClassRoom(String classRoom) {
 		this.classRoom = classRoom;
 	}
+
+	public int getProId() {
+		return proId;
+	}
+
+	public void setProId(int proId) {
+		this.proId = proId;
+	}
+	
+	
 	
 	
 }

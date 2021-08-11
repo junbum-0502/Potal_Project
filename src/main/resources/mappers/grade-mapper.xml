@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Grade">
+
+	<resultMap type="Grade" id="grade">
+		<result property="cIdx" column="c_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="proId" column="pro_id"/>
+		<result property="regdate" column="regdate"/>
+		<result property="midScore" column="mid_score"/>
+		<result property="finalScore" column="final_score"/>
+		<result property="score" column="score"/>
+		<result property="grade" column="grade"/>
+		<result property="name" column="name"/>
+		<result property="yearSemester" column="year_semester"/>
+		<result property="credit" column="credit"/>
+	</resultMap>
+	
+	<resultMap type="Schedule" id="schedule">
+		<result property="cIdx" column="c_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="title" column="title"/>
+		<result property="time" column="time"/>
+		<result property="pName" column="p_name"/>
+		<result property="sName" column="s_name"/>
+		<result property="classRoom" column="classroom"/>
+		<result property="proId" column="pro_id"/>
+	</resultMap>
+	
+	
+
+ 	<select id="selectClassAll" resultType="map">
+	SELECT * FROM CLASS WHERE USER_ID = #{proId}
+	</select>
+	
+	<select id="selectScoreAll" resultType="map">
+	SELECT * FROM SCHEDULE WHERE PRO_ID = #{proId} AND C_IDX = #{cIdx}
+	</select>
+	
+<!-- 	<select id="selectScoreById" resultType="map">
+	SELECT * FROM GRADE WHERE PRO_ID = #{proId} AND C_IDX = #{cIdx}
+	</select> -->
+
+</mapper>

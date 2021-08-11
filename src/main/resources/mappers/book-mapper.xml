@@ -29,7 +29,7 @@
 	</insert>
 
 	<update id="updateBookAmt">
-	UPDATE BOOK SET BOOK_AMT = (BOOK_AMT-1) WHERE B_IDX = #{BIDX} AND BOOK_AMT > 0
+	UPDATE BOOK SET BOOK_AMT=BOOK_AMT-1, RENT_CNT=RENT_CNT+1 WHERE B_IDX = #{BIDX} AND BOOK_AMT > 0
 	</update>
 	
 	<select id="selectRentHis" resultType="map">
