@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Message;
+import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.Scholarship;
 import com.jun.potal.vo.User;
 
@@ -59,6 +60,10 @@ public class UserDao {
 	
 	public List<Scholarship> selectSchoalr(Scholarship sch) throws Exception { // 장학금 조회
 		return sqlSession.selectList("User.selectScholar", sch); 
+	}
+	
+	public List<Schedule> schedule(Schedule sch) throws Exception { // 시간표 조회
+		return sqlSession.selectList("User.schedule", sch);
 	}
 
 }

@@ -11,8 +11,8 @@
 		<typeAlias type="com.jun.potal.vo.ServiceType" alias="ServiceType" />
 		<typeAlias type="com.jun.potal.vo.ServiceHistory" alias="ServiceHistory" />
 		<typeAlias type="com.jun.potal.vo.Scholarship" alias="Scholarship" />
-		<typeAlias type="com.jun.potal.vo.Grade" alias="Grade" />
 		<typeAlias type="com.jun.potal.vo.Schedule" alias="Schedule" />
+		<typeAlias type="com.jun.potal.vo.Grade" alias="Grade" />
 	</typeAliases>	
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->
 		<mapper resource="mappers/user-mapper.xml" />

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Message;
+import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.Scholarship;
 import com.jun.potal.vo.User;
 
@@ -31,4 +32,6 @@ public interface UserService {
 	public List<User> tuition(User user) throws Exception; // 등록금 조회
 
 	public List<Scholarship> selectScholar(Scholarship sch) throws Exception; // 장학금 조회
+	
+	public List<Schedule> schedule(Schedule sch) throws Exception; // 시간표 조회
 }
