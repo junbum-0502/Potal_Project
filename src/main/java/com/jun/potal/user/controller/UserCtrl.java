@@ -22,6 +22,7 @@ import com.google.gson.GsonBuilder;
 import com.jun.potal.user.service.UserService;
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Message;
+import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.Scholarship;
 import com.jun.potal.vo.User;
 
@@ -276,11 +277,37 @@ public class UserCtrl {
 	}
 	
 	@PostMapping(value = "schedule") // 시간표 페이지
-	public String schedule() {
+	public String schedule(HttpServletRequest request, Schedule sch, Model model) throws Exception {
 		
 		System.out.println("시간표");
+		String id = request.getParameter("userId");
+		System.out.println("id : " + id);
 		
+		sch.setUserId(Integer.valueOf(id));
+		List<Schedule> schedule = adService.schedule(sch);
+		System.out.println("시간표 : " + schedule);
+		
+		model.addAttribute("schedule", schedule);
 		
 		return "user/schedule";
+	}
+	
+	@GetMapping(value = "grade") // 성적 페이지
+	public String grade(HttpServletRequest request, User user) throws Exception {
+		
+		System.out.println("성적 페이지");
+		String id = request.getParameter("userId");
+		String type = request.getParameter("type");
+		System.out.println("id : " + id);
+		System.out.println("type : " + type);
+		if (type.equals("1")) { // 현학기
+			System.out.println("현학기 조회");
+		} else if (type.equals("2")) { // 전학기
+			System.out.println("전학기 조회");
+		} else {
+			System.out.println("값 넘기기 오류");
+		}
+		
+		return "user/grade";
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jun.potal.user.dao.UserDao;
 import com.jun.potal.vo.Book;
 import com.jun.potal.vo.Message;
+import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.Scholarship;
 import com.jun.potal.vo.User;
 
@@ -72,6 +73,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<Scholarship> selectScholar(Scholarship sch) throws Exception { // 장학금 조회
 		return uDao.selectSchoalr(sch);
+	}
+	
+	@Override
+	public List<Schedule> schedule(Schedule sch) throws Exception { // 시간표 조회
+		return uDao.schedule(sch);
 	}
 
 }
