@@ -8,7 +8,7 @@
 	<c:forEach var="score" items="${sList }" varStatus="status">
 		과목명<small>(과목번호)</small> : ${score.TITLE }<small>(${score.C_IDX})</small><br>
 		학생 이름 : ${score.S_NAME }<small>(${score.USER_ID})</small><br>
-		<a href="/potal/putScore?name=${score.S_NAME }&cIdx=${score.C_IDX}&pid=${score.PRO_ID}">성적 입력하기</a><br>
+		<a href="/potal/putScore?name=${score.S_NAME }&cIdx=${score.C_IDX}&pid=${score.PRO_ID}&userId=${score.USER_ID}">성적 입력하기</a><br>
 		<hr>
 	</c:forEach>
 <%-- 	<c:forEach var="info" items="${aList }" varStatus="status">

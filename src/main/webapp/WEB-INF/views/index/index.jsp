@@ -101,7 +101,8 @@
                         			<a class="collapse-item" href="<%=request.getContextPath()%>/potal/grade?userId=${info.userId }&type=2">성적조회 (전학기)</a>
                         		</c:if>
                         		<c:if test="${info.type eq 2 }"> <!-- 교수 -->
-                        			<a class="collapse-item" href="/potal/gradeAll?pId=${info.userId}">성적조회 / 성적입력</a>
+                        			<a class="collapse-item" href="/potal/gradeAll?pId=${info.userId}">성적입력</a>
+                        			<a class="collapse-item" href="#">성적수정</a>
                         			<a class="collapse-item" href="#">성적조회 (전학기)</a>
                         		</c:if>
                         	</c:forEach>

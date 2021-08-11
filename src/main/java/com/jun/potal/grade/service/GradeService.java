@@ -13,4 +13,6 @@ public interface GradeService {
 	
 	/* List<Grade> selectScoreById(Grade grade) throws Exception; */
 	
+	int insertScoreByIdx(Grade grade) throws Exception;
+	
 }

@@ -29,6 +29,12 @@ public class GradeServiceImpl implements GradeService{
 		return gradeDao.selectScoreAll(schedule);
 	}
 
+	// 성적입력
+	@Override
+	public int insertScoreByIdx(Grade grade) throws Exception {
+		return gradeDao.insertScoreByIdx(grade);
+	}
+
 	/*
 	 * @Override public List<Grade> selectScoreById(Grade grade) throws Exception {
 	 * 

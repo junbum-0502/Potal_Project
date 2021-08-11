@@ -24,6 +24,9 @@ public class GradeDao {
 		return sqlSession.selectList("Grade.selectScoreAll",schedule);
 	}
 	
+	public int insertScoreByIdx(Grade grade) throws Exception{
+		return sqlSession.insert("Grade.insertScoreByIdx",grade);
+	}
 	/*
 	 * public List<Grade> selectScoreById(Grade grade) throws Exception{ return
 	 * sqlSession.selectList("Grade.selectScoreById",grade); }

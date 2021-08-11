@@ -37,9 +37,14 @@
 	<select id="selectScoreAll" resultType="map">
 	SELECT * FROM SCHEDULE WHERE PRO_ID = #{proId} AND C_IDX = #{cIdx}
 	</select>
+
+	<insert id="insertScoreByIdx">
+	INSERT INTO 
+	GRADE(C_IDX,USER_ID,PRO_ID,NAME,MID_SCORE,FINAL_SCORE,SCORE,CREDIT,GRADE,YEAR_SEMESTER) 
+	VALUES (#{cIdx},#{userId},#{proId},#{name},#{midScore},#{finalScore},#{score},#{credit},#{grade},#{yearSemester})
+	</insert>
 	
-<!-- 	<select id="selectScoreById" resultType="map">
-	SELECT * FROM GRADE WHERE PRO_ID = #{proId} AND C_IDX = #{cIdx}
-	</select> -->
+	
+	
 
 </mapper>
