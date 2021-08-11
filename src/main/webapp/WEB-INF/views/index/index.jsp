@@ -61,6 +61,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
  						<c:if test="${empty login }"> <!-- 비로그인 -->
                        		<a class="collapse-item" onclick="notLog();">수업시간표</a>
+                       		<a class="collapse-item" onclick="notLog();">E-Class</a>
                        	</c:if>
                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         	<c:forEach var="info" items="${login }" varStatus="status">
@@ -69,6 +70,7 @@
 	                       			<a class="collapse-item" onclick="onSubmit();">수업시간표</a>	
 		                        </form>
 	                        </c:forEach>
+	                       <a class="collapse-item" href="">E-Class</a>
                         </c:if>
    							<c:if test="${empty login }"> <!-- 비로그인 -->
                         		<a class="collapse-item" href="#">교과목 조회</a>
