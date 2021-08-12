@@ -349,4 +349,29 @@ public class UserCtrl {
 			return "user/grade";
 		}
 	}
+	
+	@GetMapping(value = "classIndex")
+	public String eClassIndex(HttpServletRequest request, Schedule sch, Model model) throws Exception {
+		
+		String id = request.getParameter("userId");
+		System.out.println("id : " + id);
+		sch.setUserId(Integer.valueOf(id));
+		
+		List<Schedule> eClass = adService.schedule(sch);
+		System.out.println("수업 : " + eClass);
+		model.addAttribute("eClass", eClass);
+		
+		return "user/classIndex";
+	}
+	
+	@GetMapping(value = "class")
+	public String eClass(HttpServletRequest request, Model model) throws Exception {
+		
+		String id = request.getParameter("userId");
+		System.out.println("id : " + id);
+		
+		model.addAttribute("id", id);
+		
+		return "user/class";
+	}
 }

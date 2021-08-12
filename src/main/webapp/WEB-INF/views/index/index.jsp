@@ -3,7 +3,11 @@
 <%-- <%@ include file="/WEB-INF/views/include/head.jsp" %> --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<style>
+#schForm{
+	margin: 0;
+}
+</style>
 <head>
 
     <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -61,6 +65,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
  						<c:if test="${empty login }"> <!-- 비로그인 -->
                        		<a class="collapse-item" onclick="notLog();">수업시간표</a>
+                       		<a class="collapse-item" href="notLog();">교과목 조회</a>
                        		<a class="collapse-item" onclick="notLog();">E-Class</a>
                        	</c:if>
                         <c:if test="${!empty login }"> <!-- 로그인 -->
@@ -70,13 +75,10 @@
 	                       			<a class="collapse-item" onclick="onSubmit();">수업시간표</a>	
 		                        </form>
 	                        </c:forEach>
-	                       <a class="collapse-item" href="">E-Class</a>
-                        </c:if>
-   							<c:if test="${empty login }"> <!-- 비로그인 -->
-                        		<a class="collapse-item" href="#">교과목 조회</a>
-                        	</c:if>
-                        	<c:if test="${!empty login }"> <!-- 로그인 -->
-                        		<a class="collapse-item" href="#">교과목 조회</a>
+	                        <a class="collapse-item" href="#">교과목 조회</a>
+	                        <c:forEach var="info" items="${login }" varStatus="status">
+	                       		<a class="collapse-item" href="<%=request.getContextPath()%>/potal/classIndex?userId=${info.userId }">E-Class</a>
+	                       	</c:forEach>
                         </c:if>
                     </div>
                 </div>
