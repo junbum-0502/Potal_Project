@@ -89,7 +89,14 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-graduation-cap"></i>
-                    <span>학생 / 성적</span>
+                    <c:forEach var="info" items="${login }" varStatus="status">
+                    	<c:if test="${info.type eq 1 }">
+                    		<span>성적</span>
+                    	</c:if>
+                    	<c:if test="${info.type eq 2 }">
+                    		<span>학생 / 성적</span>
+                    	</c:if>
+                    </c:forEach>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
