@@ -177,6 +177,10 @@
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                    	<c:if test="${empty login }"> <!-- 비로그인 -->
+                        <a class="collapse-item" onclick="notLog();">도서 조회/대출</a>
+                        </c:if>
+                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         <a class="collapse-item" href="/potal/book">도서 조회/대출</a>
                         <form method="GET" action="potal/rentHistory" id="rentForm">
 	                        <c:forEach var="User" items="${login}" varStatus="status">   
@@ -184,6 +188,7 @@
 	                        <a class="collapse-item" onclick="test();">대출조회</a>         
 	                        </c:forEach>                 
                         </form>
+                        </c:if>
                     </div>
                 </div>
             </li>
@@ -196,15 +201,18 @@
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                    	<c:if test="${empty login }"> <!-- 비로그인 -->
+                        <a class="collapse-item" onclick="notLog();">민원 조회/신청</a>
+                        </c:if>
+                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         <a class="collapse-item" href="/potal/serviceList">민원 조회/신청</a>
-                        
                         <form method="GET" action="/potal/reqService" id="serForm">
 	                        <c:forEach var="User" items="${login}" varStatus="status">   
 	                        <input type="hidden" value="${User.userId }" name="userId">  
 	                         <a class="collapse-item" onclick="test1();">민원신청내역</a>       
 	                        </c:forEach>                 
                         </form>
-                        
+                        </c:if>
                        <!--  <a class="collapse-item" href="/potal/reqService">민원신청내역</a> -->
                     </div>
                 </div>
