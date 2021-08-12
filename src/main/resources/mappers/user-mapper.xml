@@ -80,7 +80,7 @@
 	
 	<!-- 시간표 조회 -->
 	<select id="schedule" resultType="map">
-		SELECT * FROM SCHEDULE WHERE USER_ID = #{userId}
+		SELECT * FROM SCHEDULE WHERE USER_ID = #{userId} OR PRO_ID = #{userId}
 	</select>
 	
 	<!-- 현학기 성적 조회 -->
