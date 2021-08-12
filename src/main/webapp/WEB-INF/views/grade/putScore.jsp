@@ -11,7 +11,7 @@
 </head>
 <body>
 	<br><br>
-	성적 입력(수정) 페이지<br><hr>
+	성적 입력 페이지<br><hr>
 	
 	<form method="post" id="scoreForm" action="/potal/updateScore">
 	

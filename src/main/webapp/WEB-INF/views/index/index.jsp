@@ -87,7 +87,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-graduation-cap"></i>
-                    <span>성적</span>
+                    <span>학생 / 성적</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
@@ -104,8 +104,8 @@
                         		</c:if>
                         		<c:if test="${info.type eq 2 }"> <!-- 교수 -->
                         			<a class="collapse-item" href="/potal/gradeAll?pId=${info.userId}">성적입력</a>
-                        			<a class="collapse-item" href="#">성적수정</a>
-                        			<a class="collapse-item" href="#">성적조회 (전학기)</a>
+                        			<a class="collapse-item" href="/potal/gradeUpdateAll?pId=${info.userId}">성적수정</a>
+                        			<a class="collapse-item" href="/potal/findStudentInfo?pId=${info.userId }&mIdx=${info.mIdx}">학생 조회</a>
                         		</c:if>
                         	</c:forEach>
                         </c:if>
