@@ -7,6 +7,18 @@
 #schForm{
 	margin: 0;
 }
+
+#loginForm {
+	margin: auto;
+	margin-right: 10px;
+}
+
+.loginBtn {
+	border-radius: 6px;
+	border: 0;
+    height: 35px;
+}
+
 </style>
 <head>
 
@@ -476,8 +488,8 @@
                     </ul>
                     </c:if>
 					<c:if test="${empty login }">
-						<form method="GET" action="<%=request.getContextPath()%>/potal/login">
-							<input type="submit" value="로그인">
+						<form method="GET" action="<%=request.getContextPath()%>/potal/login" id="loginForm">
+							<input type="submit" value="로그인" class="loginBtn">
 						</form>
 					</c:if>
 					<!-- 여기까지 -->
