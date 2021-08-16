@@ -81,22 +81,23 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-						<c:if test="${empty login }"> <!-- 비로그인 -->
+ 						<c:if test="${empty login }"> <!-- 비로그인 -->
                        		<a class="collapse-item" onclick="notLog();">수업시간표</a>
+                       		<a class="collapse-item" href="notLog();">교과목 조회</a>
                        		<a class="collapse-item" onclick="notLog();">E-Class</a>
                        	</c:if>
                         <c:if test="${!empty login }"> <!-- 로그인 -->
-	                    	<form method="POST" action="<%=request.getContextPath()%>/potal/schedule" id="schForm">
-	                        		<a class="collapse-item" onclick="onSubmit();">수업시간표</a>	
-	                        </form>
-	                        <a class="collapse-item" href="">E-Class</a>
+                        	<c:forEach var="info" items="${login }" varStatus="status">
+		                    	<form method="POST" action="<%=request.getContextPath()%>/potal/schedule" id="schForm">	
+		                    		<input type="hidden" value="${info.userId }" name="userId">
+	                       			<a class="collapse-item" onclick="onSubmit();">수업시간표</a>	
+		                        </form>
+	                        </c:forEach>
+	                        <a class="collapse-item" href="#">교과목 조회</a>
+	                        <c:forEach var="info" items="${login }" varStatus="status">
+	                       		<a class="collapse-item" href="<%=request.getContextPath()%>/potal/classIndex?userId=${info.userId }">E-Class</a>
+	                       	</c:forEach>
                         </c:if>
-   							<c:if test="${empty login }"> <!-- 비로그인 -->
-                        		<a class="collapse-item" href="#">교과목 조회</a>
-                        	</c:if>
-                        	<c:if test="${!empty login }"> <!-- 로그인 -->
-                        		<a class="collapse-item" href="#">교과목 조회</a>
-                        	</c:if>
                     </div>
                 </div>
             </li>
@@ -106,7 +107,19 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-graduation-cap"></i>
-                    <span>학생 / 성적</span>
+                    <c:if test="${!empty login }">
+	                    <c:forEach var="info" items="${login }" varStatus="status">
+	                    	<c:if test="${info.type eq 1 }">
+	                    		<span>성적</span>
+	                    	</c:if>
+	                    	<c:if test="${info.type eq 2 }">
+	                    		<span>학생 / 성적</span>
+	                    	</c:if>
+	                    </c:forEach>
+                    </c:if>
+                    <c:if test="${empty login }">
+                    	<span>성적</span>
+                    </c:if>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
@@ -118,8 +131,8 @@
                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         	<c:forEach var="info" items="${login }" varStatus="status">
                        			<c:if test="${info.type eq 1 }"> <!-- 학생 -->
-                        			<a class="collapse-item" href="#">성적조회 (현학기)</a>
-                        			<a class="collapse-item" href="#">성적조회 (전학기)</a>
+                        			<a class="collapse-item" href="<%=request.getContextPath()%>/potal/gradeIndex?userId=${info.userId }&type=1">성적조회 (현학기)</a>
+                        			<a class="collapse-item" href="<%=request.getContextPath()%>/potal/gradeIndex?userId=${info.userId }&type=2">성적조회 (전학기)</a>
                         		</c:if>
                         		<c:if test="${info.type eq 2 }"> <!-- 교수 -->
                         			<a class="collapse-item" href="/potal/gradeAll?pId=${info.userId}">성적입력</a>
@@ -182,27 +195,43 @@
                 </a>
                 <div id="collapsePages2" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="/potal/book">도서 조회/대출</a>
-                        <form method="GET" action="rentHistory" id="rentForm">
+                    	<c:if test="${empty login }"> <!-- 비로그인 -->
+                        <a class="collapse-item" onclick="notLog();">도서 조회/대출</a>
+                        </c:if>
+                         <c:if test="${!empty login }"> <!-- 로그인 -->
+                        <a class="collapse-item" href="/potal/book">도서 조회/대출</a>
+                        <form method="GET" action="potal/rentHistory" id="rentForm">
 	                        <c:forEach var="User" items="${login}" varStatus="status">   
 	                        <input type="hidden" value="${User.userId }" name="userId">  
 	                        <a class="collapse-item" onclick="test();">대출조회</a>         
 	                        </c:forEach>                 
                         </form>
+                        </c:if>
                     </div>
                 </div>
             </li>
             
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
-                    aria-expanded="true" aria-controls="collapsePages2">
+                    aria-expanded="true" aria-controls="collapsePages3">
                     <i class="fab fa-hire-a-helper"></i>
                     <span>서비스</span>
                 </a>
                 <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
+                    	<c:if test="${empty login }"> <!-- 비로그인 -->
+                        <a class="collapse-item" onclick="notLog();">민원 조회/신청</a>
+                        </c:if>
+                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         <a class="collapse-item" href="/potal/serviceList">민원 조회/신청</a>
-                        <a class="collapse-item" href="/potal/reqService">민원신청내역</a>
+                        <form method="GET" action="/potal/reqService" id="serForm">
+	                        <c:forEach var="User" items="${login}" varStatus="status">   
+	                        <input type="hidden" value="${User.userId }" name="userId">  
+	                         <a class="collapse-item" onclick="test1();">민원신청내역</a>       
+	                        </c:forEach>                 
+                        </form>
+                        </c:if>
+                       <!--  <a class="collapse-item" href="/potal/reqService">민원신청내역</a> -->
                     </div>
                 </div>
             </li>
@@ -213,7 +242,7 @@
                 커뮤니티
             </div>
             
-          <li class="nav-item">
+           <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages4"
                     aria-expanded="true" aria-controls="collapsePages4">
                     <i class="fas fa-clipboard"></i>
@@ -240,27 +269,6 @@
                     </div>
                 </div>
             </li>
-
-
-
-
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message -->
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="/resources/img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div>
-
-        </ul>
         
  
 </div>
