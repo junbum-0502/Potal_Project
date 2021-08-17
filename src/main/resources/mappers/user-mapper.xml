@@ -15,6 +15,7 @@
 		<result property="isLeave" column="is_leave"/>
 		<result property="sIdx" column="s_idx"/>
 		<result property="pIdx" column="p_idx"/>
+		<result property="semester" column="semester"/>
 	</resultMap>
 	<resultMap type="Scholarship" id="scholarship">
 		<id property="sIdx" column="s_idx"/>
@@ -93,5 +94,9 @@
 		SELECT * FROM GRADE WHERE USER_ID = #{userId}
 	</select>
 	
+	<!-- 학과 조회 -->
+	<select id="major" resultType="map">
+		SELECT NAME FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
+	</select>
 	
 </mapper>

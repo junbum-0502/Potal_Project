@@ -91,6 +91,11 @@ public class UserServiceImpl implements UserService {
 		return uDao.gradeAll(grade);
 	}
 	
+	@Override
+	public List<User> major(User user) throws Exception { // 학과 조회
+		return uDao.major(user);
+	}
+	
 	
 
 }

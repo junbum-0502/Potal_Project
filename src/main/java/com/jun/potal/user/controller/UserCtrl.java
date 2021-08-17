@@ -374,4 +374,18 @@ public class UserCtrl {
 		
 		return "user/class";
 	}
+	
+	@PostMapping(value = "major")
+	@ResponseBody
+	public List<User> major(HttpServletRequest request, User user, Model model) throws Exception {
+		
+		String major = request.getParameter("tuition");
+		System.out.println("major : " + major);
+		user.setmIdx(Integer.valueOf(major));
+		
+		List<User> major_info = adService.major(user);
+		System.out.println("major_info : " + major_info);
+		
+		return major_info;
+	}
 }

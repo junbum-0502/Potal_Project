@@ -16,14 +16,15 @@ public class User {
 	private int isLeave;
 	private int sIdx;
 	private int pIdx;
+	private int semester;
 	
 	
 	
 	@Override
 	public String toString() {
-		return "UserVo [userId=" + userId + ", mIdx=" + mIdx + ", password=" + password + ", name=" + name + ", email="
+		return "User [userId=" + userId + ", mIdx=" + mIdx + ", password=" + password + ", name=" + name + ", email="
 				+ email + ", phone=" + phone + ", type=" + type + ", regdate=" + regdate + ", birth=" + birth
-				+ ", isLeave=" + isLeave + ", sIdx=" + sIdx + ", pIdx=" + pIdx + "]";
+				+ ", isLeave=" + isLeave + ", sIdx=" + sIdx + ", pIdx=" + pIdx + ", semester=" + semester + "]";
 	}
 
 	public int getUserId() {
@@ -40,6 +41,14 @@ public class User {
 
 	public void setmIdx(int mIdx) {
 		this.mIdx = mIdx;
+	}
+	
+	public int getSemester() {
+		return semester;
+	}
+
+	public void setSemester(int semester) {
+		this.semester = semester;
 	}
 
 	public String getPassword() {

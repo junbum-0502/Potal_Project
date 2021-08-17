@@ -74,5 +74,9 @@ public class UserDao {
 	public List<Grade> gradeAll(Grade grade) throws Exception { // 전학기 성적 조회
 		return sqlSession.selectList("User.gradeAll", grade);
 	}
+	
+	public List<User> major(User user) throws Exception { // 학과 조회
+		return sqlSession.selectList("User.major", user);
+	}
 
 }

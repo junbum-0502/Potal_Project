@@ -39,4 +39,6 @@ public interface UserService {
 	public List<Grade> grade(Grade grade) throws Exception; // 현학기 성적 조회
 	
 	public List<Grade> gradeAll(Grade grade) throws Exception; // 전학기 성적 조회
+	
+	public List<User> major(User user) throws Exception; // 학과 조회
 }
