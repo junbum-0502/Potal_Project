@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<Scholarship> selectScholar(Scholarship sch) throws Exception { // 장학금 조회
+	public List<Scholarship> selectScholar(Scholarship sch) throws Exception { // 장학금 총액 조회
 		return uDao.selectSchoalr(sch);
 	}
 	
@@ -94,6 +94,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> major(User user) throws Exception { // 학과 조회
 		return uDao.major(user);
+	}
+	
+	@Override
+	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 조회
+		return uDao.semesterScholar(sch);
 	}
 	
 	

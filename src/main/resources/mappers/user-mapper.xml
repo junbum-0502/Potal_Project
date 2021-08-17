@@ -22,6 +22,7 @@
 		<result property="siIdx" column="si_idx"/>
 		<result property="userId" column="user_id"/>
 		<result property="amount" column="amount"/>
+		<result property="semester" column="semester"/>
 	</resultMap>
 	
 	<!-- 로그인 -->
@@ -74,7 +75,7 @@
 		SELECT TUITION FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
 	</select>
 	
-	<!-- 장학금 조회 -->
+	<!-- 장학금  총액 조회 -->
 	<select id="selectScholar" resultType="scholarship">
 		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE USER_ID = #{userId}
 	</select>
@@ -97,6 +98,11 @@
 	<!-- 학과 조회 -->
 	<select id="major" resultType="map">
 		SELECT NAME FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
+	</select>
+	
+	<!-- 장학금 학기별 조회 -->
+	<select id="semesterScholar" resultType="scholarship">
+		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE SEMESTER = #{semester}
 	</select>
 	
 </mapper>

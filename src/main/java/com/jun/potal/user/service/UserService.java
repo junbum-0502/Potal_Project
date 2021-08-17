@@ -32,7 +32,7 @@ public interface UserService {
 	
 	public List<User> tuition(User user) throws Exception; // 등록금 조회
 
-	public List<Scholarship> selectScholar(Scholarship sch) throws Exception; // 장학금 조회
+	public List<Scholarship> selectScholar(Scholarship sch) throws Exception; // 장학금 총액 조회
 	
 	public List<Schedule> schedule(Schedule sch) throws Exception; // 시간표 조회
 	
@@ -41,4 +41,6 @@ public interface UserService {
 	public List<Grade> gradeAll(Grade grade) throws Exception; // 전학기 성적 조회
 	
 	public List<User> major(User user) throws Exception; // 학과 조회
+	
+	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception; // 장학금 학기별 조회
 }

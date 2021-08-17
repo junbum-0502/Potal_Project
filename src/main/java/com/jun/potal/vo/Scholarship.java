@@ -6,10 +6,20 @@ public class Scholarship {
 	private int siIdx;
 	private int userId;
 	private String amount;
+	private String semester;
 	
 	@Override
 	public String toString() {
-		return "Scholarship [sIdx=" + sIdx + ", siIdx=" + siIdx + ", userId=" + userId + ", amount=" + amount + "]";
+		return "Scholarship [sIdx=" + sIdx + ", siIdx=" + siIdx + ", userId=" + userId + ", amount=" + amount
+				+ ", semester=" + semester + "]";
+	}
+
+	public String getSemester() {
+		return semester;
+	}
+
+	public void setSemester(String semester) {
+		this.semester = semester;
 	}
 
 	public int getsIdx() {

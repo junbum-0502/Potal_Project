@@ -261,6 +261,12 @@ public class UserCtrl {
 		return tuition;
 	}
 	
+	@GetMapping(value="tuitionIndex") // 등록금 페이지
+	public String tuitionIndex() throws Exception {
+		
+		return "user/tuition";
+	}
+	
 	@PostMapping(value="scholarship") // 장학금
 	@ResponseBody
 	public List<Scholarship> selectScholar(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 조회
@@ -387,5 +393,19 @@ public class UserCtrl {
 		System.out.println("major_info : " + major_info);
 		
 		return major_info;
+	}
+	
+	@PostMapping(value="semesterScholar")
+	@ResponseBody
+	public List<Scholarship> semesterScholar(HttpServletRequest request, Scholarship sch) throws Exception {
+		
+		String semester = request.getParameter("sValue");
+		System.out.println("학기  : " + semester);
+		sch.setSemester(semester);
+		
+		List<Scholarship> scholar = adService.semesterScholar(sch);
+		System.out.println("장학금 : " + scholar);
+		
+		return scholar;
 	}
 }

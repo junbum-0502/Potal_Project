@@ -159,7 +159,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">등록금조회</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/potal/tuitionIndex">등록금조회</a>
                         <a class="collapse-item" href="register.html">등록금 납부확인서</a>
                     </div>
                 </div>

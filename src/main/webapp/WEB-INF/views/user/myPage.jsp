@@ -85,7 +85,7 @@ input[type="password"] {
 	text-align: left;
     height: 60px;
     width: 900px;
-    margin-left: 370px;
+    margin-left: 620px;
 }
 </style>
 
@@ -96,7 +96,6 @@ input[type="password"] {
 	<input type="hidden" value="${info.userId }" id="id"> <!-- 학번 -->
 	<input type="hidden" value="${info.mIdx }" id="tuition"> <!-- 학과번호 -->
 	<input type="hidden" value="${info.semester }" id="semester"> <!-- 학기 -->
-	<br><br>
 	<div class="guideInfo">
 		<c:if test="${info.type eq 1}">
 			<p class="guide">학생 정보</p>

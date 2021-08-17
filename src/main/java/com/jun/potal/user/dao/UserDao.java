@@ -59,7 +59,7 @@ public class UserDao {
 		return sqlSession.selectList("User.tuition", user);
 	}
 	
-	public List<Scholarship> selectSchoalr(Scholarship sch) throws Exception { // 장학금 조회
+	public List<Scholarship> selectSchoalr(Scholarship sch) throws Exception { // 장학금 총액 조회
 		return sqlSession.selectList("User.selectScholar", sch); 
 	}
 	
@@ -77,6 +77,10 @@ public class UserDao {
 	
 	public List<User> major(User user) throws Exception { // 학과 조회
 		return sqlSession.selectList("User.major", user);
+	}
+	
+	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 조회
+		return sqlSession.selectList("User.semesterScholar", sch);
 	}
 
 }
