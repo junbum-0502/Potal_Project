@@ -1,16 +1,27 @@
 package com.jun.potal.book.controller;
 
+<<<<<<< HEAD
+=======
+import java.lang.ProcessBuilder.Redirect;
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+<<<<<<< HEAD
 
+=======
+import javax.servlet.http.HttpSession;
+
+import org.apache.taglibs.standard.tag.common.fmt.ParseDateSupport;
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -18,6 +29,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jun.potal.book.model.service.BookService;
 import com.jun.potal.vo.Book;
+=======
+
+import com.jun.potal.book.model.service.BookService;
+import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Rent;
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 import com.jun.potal.vo.User;
 
 @Controller
@@ -28,6 +45,7 @@ public class bookController {
 	private  BookService bookService;
 
 	@GetMapping("book")
+<<<<<<< HEAD
 	public String index(Model model,@RequestParam(defaultValue="1") int page) throws Exception{
 		/*
 		 * List<Book> bList = new ArrayList<Book>();
@@ -38,10 +56,20 @@ public class bookController {
 		
 		model.addAllAttributes(bookService.selectBook(page));
 			
+=======
+	public String index(Model model) throws Exception{
+		List<Book> bList = new ArrayList<Book>();
+		/* Map<String,Object> commandMap = new HashMap<String, Object>(); */
+
+		bList =	bookService.selectBook();
+		/* System.out.println(bList.toString()); */
+		model.addAttribute("bList",bList);
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 		/* commandMap.put("bList1", bList); */
 		return "book/findBook";
 	}
 	
+<<<<<<< HEAD
 	@PostMapping(value = "bookSearch", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String bookSearch(HttpServletRequest request,Model model,@RequestParam(defaultValue="1") int page, Book book) throws Exception{
@@ -97,6 +125,8 @@ public class bookController {
 		return jsonOutput; 
 	}
 	
+=======
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 	
 	@GetMapping("bookInfo")
 	public String bookInfo(String bIdx,Model model) throws Exception{

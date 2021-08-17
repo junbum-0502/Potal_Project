@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <head>
 
+<<<<<<< HEAD
 <style type="text/css">
 
 	.book_div>a{
@@ -60,10 +61,13 @@
 
 
 </style>
+=======
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 
 </head>
 <body>
 	
+<<<<<<< HEAD
 	<div class="searchBook">
 	
 		<input class="ip_rd" type="radio" name="keyword" id="title" >제목
@@ -201,4 +205,17 @@
 
 </script>
 
+=======
+	<div class="book_div">
+
+		<c:forEach var="book" items="${bList}" varStatus="status">
+			<a href="/potal/bookInfo?bIdx=${book.B_IDX}">${book.TITLE }</a>
+			<hr>
+
+		</c:forEach>
+	
+	</div>
+
+</body>
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 </html>

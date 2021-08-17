@@ -17,6 +17,7 @@
 
 	
 	<select id="selectBook" resultType="map">
+<<<<<<< HEAD
 <!-- 	SELECT * FROM BOOK -->
 		select *
  		from(
@@ -39,6 +40,9 @@
  				order by ${sort} ${direction}
  			) b
  		) where (rnum between #{queryStart} and #{queryEnd}) and (title like '%' || #{title} ||'%' and author like '%' || #{author} || '%')
+=======
+	SELECT * FROM BOOK
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 	</select>
 
 	<select id="selectBookByBidx" resultType="map">
@@ -56,6 +60,7 @@
 	<select id="selectRentHis" resultType="map">
 	SELECT * FROM RENT WHERE USER_ID = #{userId}
 	</select>
+<<<<<<< HEAD
 	
 	<select id="selectContentCnt" resultType="int">
 	select count(*) from book
@@ -64,5 +69,7 @@
 	<select id="abcSelect" resultType="map">
 	SELECT * FROM BOOK WHERE (title like '%' || #{title} ||'%' and author like '%' || #{author} || '%')
 	</select>
+=======
+>>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 
 </mapper>
