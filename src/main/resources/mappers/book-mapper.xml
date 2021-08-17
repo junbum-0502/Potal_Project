@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Book"> 
+
+	<resultMap type="Book" id="book">
+		<id property="bIdx" column="b_idx"/>
+		<result property="isbn" column="isbn"/>
+		<result property="category" column="category"/>
+		<result property="title" column="title"/>
+		<result property="author" column="author"/>
+		<result property="info" column="info"/>
+		<result property="bookAmt" column="book_amt"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="rentCnt" column="rent_cnt"/>
+	</resultMap>
+
+	
+	<select id="selectBook" resultType="map">
+<!-- 	SELECT * FROM BOOK -->
+		select *
+ 		from(
+ 			select rownum rnum, b.*
+ 			from(
+ 				select *
+ 				from book
+ 				order by ${sort} ${direction}
+ 			) b
+ 		) where rnum between #{queryStart} and #{queryEnd}
+	</select>
+	
+	<select id="selectBookSearch" resultType="map">
+		select *
+ 		from(
+ 			select rownum rnum, b.*
+ 			from(
+ 				select *
+ 				from book
+ 				order by ${sort} ${direction}
+ 			) b
+ 		) where (rnum between #{queryStart} and #{queryEnd}) and (title like '%' || #{title} ||'%' and author like '%' || #{author} || '%')
+	</select>
+
+	<select id="selectBookByBidx" resultType="map">
+	SELECT * FROM BOOK WHERE B_IDX = #{BIDX}
+	</select>
+	
+	<insert id="insertRentData">
+	INSERT INTO RENT(R_IDX,USER_ID,B_IDX,ALLOW,RETURN_DATE) VALUES(SC_RENT_DATA.NEXTVAL,#{bookAmt},#{bIdx},0,SYSDATE+7)
+	</insert>
+
+	<update id="updateBookAmt">
+	UPDATE BOOK SET BOOK_AMT=BOOK_AMT-1, RENT_CNT=RENT_CNT+1 WHERE B_IDX = #{BIDX} AND BOOK_AMT > 0
+	</update>
+	
+	<select id="selectRentHis" resultType="map">
+	SELECT * FROM RENT WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="selectContentCnt" resultType="int">
+	select count(*) from book
+	</select>
+
+	<select id="abcSelect" resultType="map">
+	SELECT * FROM BOOK WHERE (title like '%' || #{title} ||'%' and author like '%' || #{author} || '%')
+	</select>
+
+</mapper>

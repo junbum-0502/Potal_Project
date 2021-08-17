@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="Grade">
+
+	<resultMap type="Grade" id="grade">
+		<result property="cIdx" column="c_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="proId" column="pro_id"/>
+		<result property="regdate" column="regdate"/>
+		<result property="midScore" column="mid_score"/>
+		<result property="finalScore" column="final_score"/>
+		<result property="score" column="score"/>
+		<result property="grade" column="grade"/>
+		<result property="name" column="name"/>
+		<result property="yearSemester" column="year_semester"/>
+		<result property="credit" column="credit"/>
+	</resultMap>
+	
+	<resultMap type="Schedule" id="schedule">
+		<result property="cIdx" column="c_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="title" column="title"/>
+		<result property="time" column="time"/>
+		<result property="pName" column="p_name"/>
+		<result property="sName" column="s_name"/>
+		<result property="classRoom" column="classroom"/>
+		<result property="proId" column="pro_id"/>
+	</resultMap>
+	
+	<resultMap type="User" id="user">
+		<id property="userId" column="user_id"/>
+		<result property="mIdx" column="m_idx"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="type" column="type"/>
+		<result property="regdate" column="regdate"/>
+		<result property="birth" column="birth"/>
+		<result property="isLeave" column="is_leave"/>
+		<result property="sIdx" column="s_idx"/>
+		<result property="pIdx" column="p_idx"/>
+	</resultMap>
+
+ 	<select id="selectClassAll" resultType="map">
+	SELECT * FROM CLASS WHERE USER_ID = #{proId}
+	</select>
+	
+	<select id="selectScoreAll" resultType="map">
+	SELECT * FROM SCHEDULE WHERE PRO_ID = #{proId} AND C_IDX = #{cIdx}
+	</select>
+
+	<insert id="insertScoreByIdx">
+	INSERT INTO 
+	GRADE(C_IDX,USER_ID,PRO_ID,NAME,MID_SCORE,FINAL_SCORE,SCORE,CREDIT,GRADE,YEAR_SEMESTER) 
+	VALUES (#{cIdx},#{userId},#{proId},#{name},#{midScore},#{finalScore},#{score},#{credit},#{grade},#{yearSemester})
+	</insert>
+	
+	<select id="selectClassUpdateAll" resultType="map">
+	SELECT * FROM CLASS WHERE USER_ID = #{proId}
+	</select>
+	
+	<update id="updateScoreByIdx">
+	UPDATE GRADE SET MID_SCORE = #{midScore}, FINAL_SCORE = #{finalScore}, SCORE = #{score}, GRADE = #{grade}, CREDIT = ${credit}, YEAR_SEMESTER = #{yearSemester}
+	WHERE USER_ID = #{userId}
+	</update>
+	
+	<select id="selectUpdateScoreByid" resultType="map">
+	SELECT * FROM GRADE WHERE USER_ID = #{userId} AND PRO_ID = #{proId} AND C_IDX = #{cIdx}
+	</select>
+	
+	<select id="scoreUserInfo" resultType="map">
+	SELECT * FROM USERS WHERE NAME = #{name}
+	</select>
+	
+	<select id="scoreUserInfoGrade" resultType="map">
+	SELECT * FROM GRADE WHERE NAME = #{name} AND C_IDX = #{cIdx} 
+	</select>
+	
+	<select id="findStudentInfo" resultType="map">
+	SELECT * FROM USERS WHERE M_IDX = #{mIdx} AND TYPE = 1
+	</select>
+	
+	<select id="studentInfoGradeAllUser" resultType="map">
+	SELECT * FROM USERS WHERE NAME = #{name} AND USER_ID = #{userId}
+	</select>
+	
+	<select id="studentInfoGradeAllGrade" resultType="map">
+	SELECT * FROM GRADE G INNER JOIN CLASS C ON G.C_IDX = C.C_IDX WHERE G.USER_ID = #{userId}
+	</select>
+	
+	<select id="studentInfoGradeAllSchedule" resultType="map">
+	SELECT * FROM SCHEDULE WHERE USER_ID = #{userId}
+	</select>
+
+</mapper>

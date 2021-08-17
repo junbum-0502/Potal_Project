@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="User">
+	<resultMap type="User" id="user">
+		<id property="userId" column="user_id"/>
+		<result property="mIdx" column="m_idx"/>
+		<result property="password" column="password"/>
+		<result property="name" column="name"/>
+		<result property="email" column="email"/>
+		<result property="phone" column="phone"/>
+		<result property="type" column="type"/>
+		<result property="regdate" column="regdate"/>
+		<result property="birth" column="birth"/>
+		<result property="isLeave" column="is_leave"/>
+		<result property="sIdx" column="s_idx"/>
+		<result property="pIdx" column="p_idx"/>
+		<result property="semester" column="semester"/>
+	</resultMap>
+	<resultMap type="Scholarship" id="scholarship">
+		<id property="sIdx" column="s_idx"/>
+		<result property="siIdx" column="si_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="amount" column="amount"/>
+		<result property="semester" column="semester"/>
+	</resultMap>
+	
+	<!-- 로그인 -->
+	<select id="login" resultMap="user">
+		SELECT * FROM USERS WHERE USER_ID = #{userId} AND PASSWORD = #{password}
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" resultMap="user">
+		SELECT * FROM USERS WHERE NAME = #{name} AND BIRTH = #{birth}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPwd" resultMap="user">
+		SELECT * FROM USERS WHERE USER_ID = #{userId} AND NAME = #{name} AND PHONE = #{phone}
+	</select>
+	
+	<!-- 비밀번호 변경 -->
+	<update id="updatePwd"> 
+		UPDATE USERS SET PASSWORD = #{password} WHERE USER_ID = #{userId}
+	</update>
+	
+	<!-- 이메일 변경 -->
+	<update id="updateEmail">
+		UPDATE USERS SET EMAIL = #{email} WHERE USER_ID = #{userId}
+	</update>
+	
+	<!-- 핸드폰 번호 변경 -->
+	<update id="updatePhone">
+		UPDATE USERS SET PHONE = #{phone} WHERE USER_ID = #{userId}
+	</update>
+	
+	<!-- 메세지 전송 -->
+	<insert id="sendMessage">
+		INSERT INTO MESSAGE VALUES (SEQ_MESSAGE.NEXTVAL, #{userId}, 999, SYSDATE, #{content})
+	</insert>
+	
+	<!-- 메세지 출력 -->
+	<select id="readMessage" resultType="map">
+		SELECT * FROM MESSAGE WHERE USER_ID = #{userId} AND R_ID = 999
+	</select>
+	
+	<!-- 프로필 사진 업로드 -->
+	<select id="profileImg" resultType="map">
+		SELECT SAVE_PATH FROM FILES WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 등록금 조회 -->
+	<select id="tuition" resultType="map">
+		SELECT TUITION FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
+	</select>
+	
+	<!-- 장학금  총액 조회 -->
+	<select id="selectScholar" resultType="scholarship">
+		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 시간표 조회 -->
+	<select id="schedule" resultType="map">
+		SELECT * FROM SCHEDULE WHERE USER_ID = #{userId} OR PRO_ID = #{userId}
+	</select>
+	
+	<!-- 현학기 성적 조회 -->
+	<select id="grade" resultType="map">
+		SELECT * FROM GRADE WHERE USER_ID = #{userId} AND YEAR_SEMESTER = #{yearSemester}
+	</select>
+	
+	<!-- 전학기 성적 조회 -->
+	<select id="gradeAll" resultType="map">
+		SELECT * FROM GRADE WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 학과 조회 -->
+	<select id="major" resultType="map">
+		SELECT NAME FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
+	</select>
+	
+	<!-- 장학금 학기별 조회 -->
+	<select id="semesterScholar" resultType="scholarship">
+		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE SEMESTER = #{semester}
+	</select>
+	
+</mapper>
