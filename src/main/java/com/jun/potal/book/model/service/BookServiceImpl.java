@@ -1,25 +1,16 @@
 package com.jun.potal.book.model.service;
 
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-=======
-import java.util.List;
->>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import com.jun.potal.book.model.repository.BookDao;
-<<<<<<< HEAD
 import com.jun.potal.common.paging.Paging;
 import com.jun.potal.vo.Book;
-=======
-import com.jun.potal.vo.Book;
-import com.jun.potal.vo.Rent;
->>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 import com.jun.potal.vo.User;
 
 @Service
@@ -31,18 +22,13 @@ public class BookServiceImpl implements BookService{
 
 
 	@Override
-<<<<<<< HEAD
 	public Map<String, Object> selectBook(int page) throws Exception{	
-=======
-	public List<Book> selectBook() throws Exception{	
->>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 		/* List<Book> bookList = bookDao.selectBook(); */
 		
 		/*
 		 * Book book = (Book) bookDao.selectBook(); Map<String,Object> commandMap = new
 		 * HashMap<String, Object>(); commandMap.put("bList", book); return commandMap;
 		 */
-<<<<<<< HEAD
 		
 		Paging paging = Paging.builder()
 				.currentPage(page)
@@ -81,9 +67,6 @@ public class BookServiceImpl implements BookService{
 		commandMap.put("bList",bookDao.selectBookSearch(paging));
 		System.out.println("서비스 임플 : " + commandMap.toString());
 		return commandMap;
-=======
-		return bookDao.selectBook();
->>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 	}
 
 
@@ -111,7 +94,6 @@ public class BookServiceImpl implements BookService{
 		return bookDao.selectRentHis(user);
 	}
 
-<<<<<<< HEAD
 	@Override
 	public List<Book> abcSelect(Book book) throws Exception {
 		// TODO Auto-generated method stub
@@ -120,8 +102,6 @@ public class BookServiceImpl implements BookService{
 
 
 
-=======
->>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 
 
 
