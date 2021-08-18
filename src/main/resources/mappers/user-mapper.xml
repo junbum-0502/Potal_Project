@@ -23,6 +23,7 @@
 		<result property="userId" column="user_id"/>
 		<result property="amount" column="amount"/>
 		<result property="semester" column="semester"/>
+		<result property="name" column="name"/>
 	</resultMap>
 	
 	<!-- 로그인 -->
@@ -107,12 +108,12 @@
 	
 	<!-- 장학금 학기별 조회 -->
 	<select id="sch" resultType="scholarship">
-		SELECT * FROM SCHOLARSHIP WHERE SEMESTER = #{semester} AND USER_ID = #{userId}
+		SELECT * FROM SCHOLARSHIP, SCHOLARSHIP_INFO WHERE SCHOLARSHIP.SI_IDX = SCHOLARSHIP_INFO.SI_IDX AND SEMESTER = #{semester} AND USER_ID = #{userId}
 	</select>
 	
 	<!-- 장학금 전체 조회 -->
 	<select id="allSch" resultType="scholarship">
-		SELECT * FROM SCHOLARSHIP WHERE USER_ID = #{userId}
+		SELECT * FROM SCHOLARSHIP, SCHOLARSHIP_INFO WHERE SCHOLARSHIP.SI_IDX = SCHOLARSHIP_INFO.SI_IDX AND USER_ID = #{userId}
 	</select>
 	
 	<!-- 장학금 학기별 수 조회 -->

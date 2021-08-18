@@ -428,7 +428,7 @@ public class UserCtrl {
 		return "user/scholarShip";
 	}
 	
-	@PostMapping(value="sch")
+	@PostMapping(value="sch", produces = "application/text; charset=utf8")
 	@ResponseBody
 	public String sch(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 전체, 학기별 조회
 		

@@ -210,7 +210,7 @@ function schList(data) {
 		cv += "<td>" + data[i].userId + "</td>"
 		cv += "<td>" + name + "</td>"
 		cv += "<td>교내감면</td>"
-		cv += "<td>국가장학금</td>"
+		cv += "<td>" + data[i].name + "</td>"
 		cv += "<td>" + data[i].amount + "</td>"
 		cv += "<td>Y</td>"
 		cv += "</tr>"
