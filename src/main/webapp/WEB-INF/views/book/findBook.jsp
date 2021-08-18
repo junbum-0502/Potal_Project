@@ -3,7 +3,6 @@
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 <head>
 
-<<<<<<< HEAD
 <style type="text/css">
 
 	.book_div>a{
@@ -61,13 +60,10 @@
 
 
 </style>
-=======
->>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
 
 </head>
 <body>
 	
-<<<<<<< HEAD
 	<div class="searchBook">
 	
 		<input class="ip_rd" type="radio" name="keyword" id="title" >제목
@@ -170,8 +166,6 @@
 		var cv1 = "";
 		var cv2 = "";
 		var cv3 = "";
-		var main1 = "";
-		var main2 = "";
 	
 		/* $("#resultR").empty(); */
 		$("#resultA").empty();
@@ -190,8 +184,6 @@
 			cv1 += "<a href='/potal/bookInfo?bIdx="+data[i].B_IDX+"'>"+data[i].TITLE+"</a>" + "<br>"
 			cv2 += data[i].AUTHOR + "<br>"
 			cv3 += "<a href='/potal/bookInfo?bIdx="+data[i].B_IDX+"'>"+'대출 신청'+"</a>" + "<br>"
-			var main1 = "<tr>";
-			var main2 = "</tr>";
 
 		})
 		/* $("#resultTr1").append(); */
@@ -205,7 +197,6 @@
 
 </script>
 
-=======
 	<div class="book_div">
 
 		<c:forEach var="book" items="${bList}" varStatus="status">
@@ -217,5 +208,5 @@
 	</div>
 
 </body>
->>>>>>> f5d471e33576b1abe1e80bd91349115fd1a216d4
+
 </html>
