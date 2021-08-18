@@ -42,5 +42,13 @@ public interface UserService {
 	
 	public List<User> major(User user) throws Exception; // 학과 조회
 	
-	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception; // 장학금 학기별 조회
+	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception; // 장학금 학기별 총액 조회
+	
+	public List<Scholarship> sch(Scholarship sch) throws Exception; // 장학금 학기별 조회
+	
+	public List<Scholarship> allSch(Scholarship sch) throws Exception; // 장학금 전체 조회
+	
+	public int schCount (Scholarship sch) throws Exception; // 장학금 학기별 수 조회
+	
+	public int allSchCount (Scholarship sch) throws Exception; // 장학금 전체 수 조회
 }

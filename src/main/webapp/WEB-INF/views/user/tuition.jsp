@@ -148,6 +148,7 @@ td {
 <c:forEach var="info" items="${login }" varStatus="status">
 	<div id="info">
 	</div>
+	<input type="hidden" value="${info.userId }" id="id"> <!-- 아이디 -->
 	<input type="hidden" value="${info.mIdx }" id="tuition"> <!-- 학과번호 -->
 	<input type="hidden" value="${info.semester }" id="semester"> <!-- 학기 -->
 	<div class="select">
@@ -340,6 +341,7 @@ td {
     	var sValue1 = target1.options[target1.selectedIndex].value;
     	var sValue2 = target2.options[target2.selectedIndex].value;
     	var sValue = sValue1 + "-" + sValue2;
+    	var id = document.getElementById("id").value;
     	if (sValue1 == 0 || sValue2 == 0) {
     		alert("학년, 학기를 선택해주세요")
     	} else {
@@ -348,6 +350,7 @@ td {
     			url : "semesterScholar",
     			type : "POST",
     			data : {
+    				id : id,
     				sValue : sValue
     			},
     			success : selectScholar,

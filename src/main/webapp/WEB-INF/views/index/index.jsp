@@ -173,7 +173,9 @@
                 </a>
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">장학금조회</a>
+                    	<c:forEach var="info" items="${login }" varStatus="status">
+                        	<a class="collapse-item" href="<%=request.getContextPath()%>/potal/schIndex?userId=${info.userId}&name=${info.name}">장학금조회</a>
+                    	</c:forEach>
                     </div>
                 </div>
             </li>

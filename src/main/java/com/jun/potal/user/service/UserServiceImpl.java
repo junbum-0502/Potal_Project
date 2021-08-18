@@ -97,10 +97,29 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 조회
+	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 총액 조회
 		return uDao.semesterScholar(sch);
 	}
 	
+	@Override
+	public List<Scholarship> sch(Scholarship sch) throws Exception { // 장학금 학기별 조회
+		return uDao.sch(sch);
+	}
+	
+	@Override
+	public List<Scholarship> allSch(Scholarship sch) throws Exception { // 장학금 전체 조회
+		return uDao.allSch(sch);
+	}
+	
+	@Override
+	public int schCount(Scholarship sch) throws Exception { // 장학금 학기별 수 조회
+		return uDao.schCount(sch);
+	}
+	
+	@Override
+	public int allSchCount(Scholarship sch) throws Exception { // 장학금 전체 수 조회
+		return uDao.allSchCount(sch);
+	}
 	
 
 }

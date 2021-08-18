@@ -100,9 +100,29 @@
 		SELECT NAME FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
 	</select>
 	
-	<!-- 장학금 학기별 조회 -->
+	<!-- 장학금 학기별 총액 조회 -->
 	<select id="semesterScholar" resultType="scholarship">
-		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE SEMESTER = #{semester}
+		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE SEMESTER = #{semester} AND USER_ID = #{userId}
+	</select>
+	
+	<!-- 장학금 학기별 조회 -->
+	<select id="sch" resultType="scholarship">
+		SELECT * FROM SCHOLARSHIP WHERE SEMESTER = #{semester} AND USER_ID = #{userId}
+	</select>
+	
+	<!-- 장학금 전체 조회 -->
+	<select id="allSch" resultType="scholarship">
+		SELECT * FROM SCHOLARSHIP WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 장학금 학기별 수 조회 -->
+	<select id="schCount" resultType="int">
+		SELECT COUNT(*) FROM SCHOLARSHIP WHERE SEMESTER = #{semester} AND USER_ID = #{userId}		
+	</select>
+	
+	<!-- 장학금 전체 수 조회 -->
+	<select id="allSchCount" resultType="int">
+		SELECT COUNT(*) FROM SCHOLARSHIP WHERE USER_ID = #{userId}
 	</select>
 	
 </mapper>

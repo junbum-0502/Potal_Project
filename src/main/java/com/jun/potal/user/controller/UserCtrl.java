@@ -395,17 +395,90 @@ public class UserCtrl {
 		return major_info;
 	}
 	
-	@PostMapping(value="semesterScholar")
+	@PostMapping(value="semesterScholar") // 학기별 장학금 총액
 	@ResponseBody
 	public List<Scholarship> semesterScholar(HttpServletRequest request, Scholarship sch) throws Exception {
 		
 		String semester = request.getParameter("sValue");
+		String id = request.getParameter("id");
 		System.out.println("학기  : " + semester);
+		System.out.println("아이디 : " + id);
 		sch.setSemester(semester);
+		sch.setUserId(Integer.valueOf(id));
 		
 		List<Scholarship> scholar = adService.semesterScholar(sch);
 		System.out.println("장학금 : " + scholar);
 		
 		return scholar;
+	}
+	
+	@GetMapping(value="schIndex")
+	public String schIndex(HttpServletRequest request, Model model, Scholarship sch) throws Exception {
+		
+		String id = request.getParameter("userId");
+		String name = request.getParameter("name");
+		sch.setUserId(Integer.valueOf(id));
+		int count = adService.allSchCount(sch);
+		System.out.println("count : " + count);
+		
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("count", count);
+		
+		return "user/scholarShip";
+	}
+	
+	@PostMapping(value="sch")
+	@ResponseBody
+	public String sch(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 전체, 학기별 조회
+		
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String sValue = request.getParameter("sValue");
+		System.out.println("id : " + id);
+		System.out.println("name : " + name);
+		System.out.println("sValue : " + sValue);
+		
+		if (sValue.equals("-전체")) { // 전체
+			sch.setUserId(Integer.valueOf(id));
+			List<Scholarship> schList = adService.allSch(sch);
+			System.out.println("schList : " + schList);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(schList);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else { // 학기별
+			sch.setUserId(Integer.valueOf(id));
+			sch.setSemester(sValue);
+			List<Scholarship> schList = adService.sch(sch);
+			System.out.println("schList : " + schList);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(schList);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		}
+	}
+	
+	@PostMapping(value="schCount")
+	@ResponseBody
+	public int schCount(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 전체, 학기별 조회
+		
+		String id = request.getParameter("id");
+		String sValue = request.getParameter("sValue");
+		System.out.println("id : " + id);
+		System.out.println("sValue : " + sValue);
+		
+		if (sValue.equals("-전체")) { // 전체
+			sch.setUserId(Integer.valueOf(id));
+			int schCount = adService.allSchCount(sch);
+			System.out.println("schCount : " + schCount);
+			return schCount;
+		} else { // 학기별
+			sch.setUserId(Integer.valueOf(id));
+			sch.setSemester(sValue);
+			int schCount = adService.schCount(sch);
+			System.out.println("schCount : " + schCount);
+			return schCount;
+		}
 	}
 }
