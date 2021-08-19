@@ -51,4 +51,6 @@ public interface UserService {
 	public int schCount (Scholarship sch) throws Exception; // 장학금 학기별 수 조회
 	
 	public int allSchCount (Scholarship sch) throws Exception; // 장학금 전체 수 조회
+	
+	public List<Grade> gradeInfo(Grade grade) throws Exception; // 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점)
 }

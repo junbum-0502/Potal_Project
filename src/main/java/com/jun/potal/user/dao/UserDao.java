@@ -98,5 +98,9 @@ public class UserDao {
 	public int allSchCount(Scholarship sch) throws Exception { // 장학금 전체 수 조회
 		return sqlSession.selectOne("User.allSchCount", sch);
 	}
+	
+	public List<Grade> gradeInfo(Grade grade) throws Exception { // 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점)
+		return sqlSession.selectList("User.gradeInfo", grade);
+	}
 
 }

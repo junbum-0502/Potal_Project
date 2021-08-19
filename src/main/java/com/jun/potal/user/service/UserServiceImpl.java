@@ -121,5 +121,9 @@ public class UserServiceImpl implements UserService {
 		return uDao.allSchCount(sch);
 	}
 	
+	@Override
+	public List<Grade> gradeInfo(Grade grade) throws Exception { // 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점)
+		return uDao.gradeInfo(grade);
+	}
 
 }

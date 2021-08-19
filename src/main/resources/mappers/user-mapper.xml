@@ -25,6 +25,14 @@
 		<result property="semester" column="semester"/>
 		<result property="name" column="name"/>
 	</resultMap>
+	<resultMap type="Grade" id="grade">
+		<id property="cIdx" column="cIdx"/>
+		<result property="userId" column="user_id"/>
+		<result property="proId" column="pro_id"/>
+		<result property="score" column="score"/>
+		<result property="credit" column="credit"/>
+		<result property="classCredit" column="class_credit"/> 	
+	</resultMap>
 	
 	<!-- 로그인 -->
 	<select id="login" resultMap="user">
@@ -93,7 +101,7 @@
 	
 	<!-- 전학기 성적 조회 -->
 	<select id="gradeAll" resultType="map">
-		SELECT * FROM GRADE WHERE USER_ID = #{userId}
+		SELECT YEAR_SEMESTER, TYPE, A.C_IDX, TITLE, CLASS_CREDIT, SCORE, GRADE FROM CLASS A, GRADE B WHERE A.C_IDX = B.C_IDX AND B.USER_ID = #{userId}
 	</select>
 	
 	<!-- 학과 조회 -->
@@ -126,4 +134,11 @@
 		SELECT COUNT(*) FROM SCHOLARSHIP WHERE USER_ID = #{userId}
 	</select>
 	
+	<!-- 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점) -->
+	<select id="gradeInfo" resultType="map">
+		SELECT SUM(CLASS_CREDIT) AS CLASS_CREDIT, ROUND(AVG(SCORE),2) AS SCORE, ROUND(AVG(CREDIT),2) AS CREDIT 
+		FROM CLASS A, GRADE B WHERE A.C_IDX = B.C_IDX AND B.USER_ID = #{userId}
+	</select>
+	
+
 </mapper>

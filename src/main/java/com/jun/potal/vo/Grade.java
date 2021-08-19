@@ -10,17 +10,32 @@ public class Grade {
 	private Date regdate;
 	private int midScore;
 	private int finalScore;
-	private int score;
+	private double score;
 	private String grade;
 	private String name;
 	private String yearSemester;
 	private double credit;
+	private int classCredit; 
 	
 	@Override
 	public String toString() {
 		return "Grade [cIdx=" + cIdx + ", userId=" + userId + ", proId=" + proId + ", regdate=" + regdate
 				+ ", midScore=" + midScore + ", finalScore=" + finalScore + ", score=" + score + ", grade=" + grade
-				+ ", name=" + name + ", yearSemester=" + yearSemester + ", credit=" + credit + "]";
+				+ ", name=" + name + ", yearSemester=" + yearSemester + ", credit=" + credit + ", classCredit="
+				+ classCredit + "]";
+	}
+	
+	public int getClassCredit() {
+		return classCredit;
+	}
+	public void setClassCredit(int classCredit) {
+		this.classCredit = classCredit;
+	}
+	public void setScore(double score) {
+		this.score = score;
+	}
+	public double getScore() {
+		return score;
 	}
 	public int getcIdx() {
 		return cIdx;
@@ -57,12 +72,6 @@ public class Grade {
 	}
 	public void setFinalScore(int finalScore) {
 		this.finalScore = finalScore;
-	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
 	}
 	public String getGrade() {
 		return grade;

@@ -481,4 +481,20 @@ public class UserCtrl {
 			return schCount;
 		}
 	}
+	
+	@PostMapping(value="gradeInfo")
+	@ResponseBody
+	public String gradeInfo(HttpServletRequest request, Grade grade) throws Exception { // 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점)
+		
+		String id = request.getParameter("id");
+		grade.setUserId(Integer.valueOf(id));
+		
+		List<Grade> gradeInfo = adService.gradeInfo(grade);
+		System.out.println("grade : " + gradeInfo);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(gradeInfo);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		
+		return jsonOutput;
+	}
 }
