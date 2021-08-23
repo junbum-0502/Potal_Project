@@ -3,6 +3,7 @@ package com.jun.potal.user.controller;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,6 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jun.potal.user.service.UserService;
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Class;
 import com.jun.potal.vo.Grade;
 import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
@@ -189,7 +191,12 @@ public class UserCtrl {
 	}
 	
 	@GetMapping("message") // 메세지 창 진입
-	public String message() {
+	public String message(HttpServletRequest request, Model model) {
+		
+		String proId = request.getParameter("proId");
+		System.out.println("msgId : " + proId);
+		model.addAttribute("proId", proId);
+		
 		return "user/message";
 	}
 	
@@ -198,8 +205,11 @@ public class UserCtrl {
 	public String readMessage(HttpServletRequest request, Message msg) throws Exception {
 		
 		String id = request.getParameter("id");
+		String proId = request.getParameter("proId");
 		System.out.println("id는 : " + id);
+		System.out.println("proId는 : " + proId);
 		msg.setUserId(Integer.valueOf(id));
+		msg.setrId(Integer.valueOf(proId));
 		
 		// 메세지 출력
 		List<Message> list = adService.readMessage(msg);
@@ -216,10 +226,14 @@ public class UserCtrl {
 		
 			String id = request.getParameter("id");
 			String content = request.getParameter("content");
+			String proId = request.getParameter("proId");
 			System.out.println("id는 : " + id);
 			System.out.println("content는 : " + content);
+			System.out.println("proId는 : " + proId);
 			msg.setUserId(Integer.valueOf(id));
 			msg.setContent(content);
+			msg.setrId(Integer.valueOf(proId));
+		
 			// 메세지 전송
 			int Message = adService.sendMessage(msg);
 			System.out.println("메세지 전송 상태 : " + Message);
@@ -283,20 +297,32 @@ public class UserCtrl {
 		
 	}
 	
-	@PostMapping(value = "schedule") // 시간표 페이지
-	public String schedule(HttpServletRequest request, Schedule sch, Model model) throws Exception {
+	@PostMapping(value = "scheduleIndex") // 시간표 페이지
+	public String scheduleIndex(HttpServletRequest request, Schedule sch, Model model) throws Exception {
 		
 		System.out.println("시간표");
 		String id = request.getParameter("userId");
 		System.out.println("id : " + id);
 		
-		sch.setUserId(Integer.valueOf(id));
-		List<Schedule> schedule = adService.schedule(sch);
-		System.out.println("시간표 : " + schedule);
-		
-		model.addAttribute("schedule", schedule);
+		model.addAttribute("id", id);
 		
 		return "user/schedule";
+	}
+	
+	@PostMapping(value="schedule", produces = "application/text; charset=utf8") // 시간표 정보
+	@ResponseBody
+	public String schedule(HttpServletRequest request, Schedule sch) throws Exception {
+		
+		String id = request.getParameter("id");
+		sch.setUserId(Integer.valueOf(id));
+		
+		List<Schedule> schList = adService.schedule(sch);
+		System.out.println("sch : " + schList);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(schList);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		
+		return jsonOutput;
 	}
 	
 	@GetMapping(value = "gradeIndex") // 성적 페이지
@@ -357,7 +383,7 @@ public class UserCtrl {
 	}
 	
 	@GetMapping(value = "classIndex")
-	public String eClassIndex(HttpServletRequest request, Schedule sch, Model model) throws Exception {
+	public String eClassIndex(HttpServletRequest request, Schedule sch, Model model) throws Exception { // 수업 페이지
 		
 		String id = request.getParameter("userId");
 		System.out.println("id : " + id);
@@ -371,12 +397,22 @@ public class UserCtrl {
 	}
 	
 	@GetMapping(value = "class")
-	public String eClass(HttpServletRequest request, Model model) throws Exception {
+	public String eClass(HttpServletRequest request, Model model, Class cla, User user) throws Exception { // 수업정보
 		
-		String id = request.getParameter("userId");
-		System.out.println("id : " + id);
+		String userId = request.getParameter("userId");
+		String proId = request.getParameter("proId");
+		String cIdx = request.getParameter("cIdx");
+		cla.setcIdx(Integer.valueOf(cIdx));
+		cla.setUserId(Integer.valueOf(proId));
+		user.setUserId(Integer.valueOf(proId));
 		
-		model.addAttribute("id", id);
+		model.addAttribute("userId", userId);
+		model.addAttribute("proId", proId);
+		model.addAttribute("cIdx", cIdx);
+		
+		List<Class> classList = adService.classInfo(cla);
+		System.out.println("classList : " + classList);
+		model.addAttribute("classList", classList);
 		
 		return "user/class";
 	}
@@ -395,17 +431,106 @@ public class UserCtrl {
 		return major_info;
 	}
 	
-	@PostMapping(value="semesterScholar")
+	@PostMapping(value="semesterScholar") // 학기별 장학금 총액
 	@ResponseBody
 	public List<Scholarship> semesterScholar(HttpServletRequest request, Scholarship sch) throws Exception {
 		
 		String semester = request.getParameter("sValue");
+		String id = request.getParameter("id");
 		System.out.println("학기  : " + semester);
+		System.out.println("아이디 : " + id);
 		sch.setSemester(semester);
+		sch.setUserId(Integer.valueOf(id));
 		
 		List<Scholarship> scholar = adService.semesterScholar(sch);
 		System.out.println("장학금 : " + scholar);
 		
 		return scholar;
+	}
+	
+	@GetMapping(value="schIndex")
+	public String schIndex(HttpServletRequest request, Model model, Scholarship sch) throws Exception {
+		
+		String id = request.getParameter("userId");
+		String name = request.getParameter("name");
+		sch.setUserId(Integer.valueOf(id));
+		int count = adService.allSchCount(sch);
+		System.out.println("count : " + count);
+		
+		model.addAttribute("id", id);
+		model.addAttribute("name", name);
+		model.addAttribute("count", count);
+		
+		return "user/scholarShip";
+	}
+	
+	@PostMapping(value="sch", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String sch(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 전체, 학기별 조회
+		
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String sValue = request.getParameter("sValue");
+		System.out.println("id : " + id);
+		System.out.println("name : " + name);
+		System.out.println("sValue : " + sValue);
+		
+		if (sValue.equals("-전체")) { // 전체
+			sch.setUserId(Integer.valueOf(id));
+			List<Scholarship> schList = adService.allSch(sch);
+			System.out.println("schList : " + schList);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(schList);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		} else { // 학기별
+			sch.setUserId(Integer.valueOf(id));
+			sch.setSemester(sValue);
+			List<Scholarship> schList = adService.sch(sch);
+			System.out.println("schList : " + schList);
+			Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+			String jsonOutput = gson.toJson(schList);
+			System.out.println("jsonOutput : "+ jsonOutput);
+			return jsonOutput;
+		}
+	}
+	
+	@PostMapping(value="schCount")
+	@ResponseBody
+	public int schCount(HttpServletRequest request, Scholarship sch) throws Exception { // 장학금 전체, 학기별 조회
+		
+		String id = request.getParameter("id");
+		String sValue = request.getParameter("sValue");
+		System.out.println("id : " + id);
+		System.out.println("sValue : " + sValue);
+		
+		if (sValue.equals("-전체")) { // 전체
+			sch.setUserId(Integer.valueOf(id));
+			int schCount = adService.allSchCount(sch);
+			System.out.println("schCount : " + schCount);
+			return schCount;
+		} else { // 학기별
+			sch.setUserId(Integer.valueOf(id));
+			sch.setSemester(sValue);
+			int schCount = adService.schCount(sch);
+			System.out.println("schCount : " + schCount);
+			return schCount;
+		}
+	}
+	
+	@PostMapping(value="gradeInfo")
+	@ResponseBody
+	public String gradeInfo(HttpServletRequest request, Grade grade) throws Exception { // 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점)
+		
+		String id = request.getParameter("id");
+		grade.setUserId(Integer.valueOf(id));
+		
+		List<Grade> gradeInfo = adService.gradeInfo(grade);
+		System.out.println("grade : " + gradeInfo);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(gradeInfo);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		
+		return jsonOutput;
 	}
 }

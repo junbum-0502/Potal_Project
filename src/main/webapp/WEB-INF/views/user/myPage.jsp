@@ -191,14 +191,14 @@ input[type="password"] {
 			</td>
 		</c:if>
 		</tr>
-		<!-- <tr>
+		<tr>
 			<td>
 				<div id="info">
 				</div>
 				<button id="btn_open">메세지</button>
 				<button id="btn_close">메세지닫기</button>
 			</td>
-		</tr>  -->
+		</tr>
 	</table>
 </c:forEach>
 </body>

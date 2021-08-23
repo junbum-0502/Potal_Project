@@ -13,6 +13,7 @@
 		<typeAlias type="com.jun.potal.vo.Scholarship" alias="Scholarship" />
 		<typeAlias type="com.jun.potal.vo.Schedule" alias="Schedule" />
 		<typeAlias type="com.jun.potal.vo.Grade" alias="Grade" />
+		<typeAlias type="com.jun.potal.vo.Class" alias="Class"/>
 		<typeAlias type="com.jun.potal.common.paging.Paging" alias="Paging" />
 	</typeAliases>	
 	<mappers> <!-- 사용하고자 하는 쿼리를 정의한 mapper.xml을 등록 -->

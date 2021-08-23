@@ -23,6 +23,15 @@
 		<result property="userId" column="user_id"/>
 		<result property="amount" column="amount"/>
 		<result property="semester" column="semester"/>
+		<result property="name" column="name"/>
+	</resultMap>
+	<resultMap type="Grade" id="grade">
+		<id property="cIdx" column="cIdx"/>
+		<result property="userId" column="user_id"/>
+		<result property="proId" column="pro_id"/>
+		<result property="score" column="score"/>
+		<result property="credit" column="credit"/>
+		<result property="classCredit" column="class_credit"/> 	
 	</resultMap>
 	
 	<!-- 로그인 -->
@@ -57,12 +66,12 @@
 	
 	<!-- 메세지 전송 -->
 	<insert id="sendMessage">
-		INSERT INTO MESSAGE VALUES (SEQ_MESSAGE.NEXTVAL, #{userId}, 999, SYSDATE, #{content})
+		INSERT INTO MESSAGE VALUES (SEQ_MESSAGE.NEXTVAL, #{userId}, #{rId}, SYSDATE, #{content})
 	</insert>
 	
 	<!-- 메세지 출력 -->
 	<select id="readMessage" resultType="map">
-		SELECT * FROM MESSAGE WHERE USER_ID = #{userId} AND R_ID = 999
+		SELECT USER_ID, R_ID, CONTENT, TO_CHAR(REGDATE, 'YYYY/MM/DD HH24:MI') AS REGDATE FROM MESSAGE WHERE (USER_ID = #{userId} AND R_ID = #{rId}) OR (USER_ID = #{rId} AND R_ID = #{userId}) ORDER BY REGDATE ASC
 	</select>
 	
 	<!-- 프로필 사진 업로드 -->
@@ -92,7 +101,7 @@
 	
 	<!-- 전학기 성적 조회 -->
 	<select id="gradeAll" resultType="map">
-		SELECT * FROM GRADE WHERE USER_ID = #{userId}
+		SELECT YEAR_SEMESTER, TYPE, A.C_IDX, TITLE, CLASS_CREDIT, SCORE, GRADE FROM CLASS A, GRADE B WHERE A.C_IDX = B.C_IDX AND B.USER_ID = #{userId}
 	</select>
 	
 	<!-- 학과 조회 -->
@@ -100,9 +109,41 @@
 		SELECT NAME FROM MAJOR_INFO WHERE M_IDX = #{mIdx}
 	</select>
 	
-	<!-- 장학금 학기별 조회 -->
+	<!-- 장학금 학기별 총액 조회 -->
 	<select id="semesterScholar" resultType="scholarship">
-		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE SEMESTER = #{semester}
+		SELECT TO_CHAR(SUM(AMOUNT), '999,999,999') AS AMOUNT FROM SCHOLARSHIP WHERE SEMESTER = #{semester} AND USER_ID = #{userId}
+	</select>
+	
+	<!-- 장학금 학기별 조회 -->
+	<select id="sch" resultType="scholarship">
+		SELECT * FROM SCHOLARSHIP, SCHOLARSHIP_INFO WHERE SCHOLARSHIP.SI_IDX = SCHOLARSHIP_INFO.SI_IDX AND SEMESTER = #{semester} AND USER_ID = #{userId}
+	</select>
+	
+	<!-- 장학금 전체 조회 -->
+	<select id="allSch" resultType="scholarship">
+		SELECT * FROM SCHOLARSHIP, SCHOLARSHIP_INFO WHERE SCHOLARSHIP.SI_IDX = SCHOLARSHIP_INFO.SI_IDX AND USER_ID = #{userId}
+	</select>
+	
+	<!-- 장학금 학기별 수 조회 -->
+	<select id="schCount" resultType="int">
+		SELECT COUNT(*) FROM SCHOLARSHIP WHERE SEMESTER = #{semester} AND USER_ID = #{userId}		
+	</select>
+	
+	<!-- 장학금 전체 수 조회 -->
+	<select id="allSchCount" resultType="int">
+		SELECT COUNT(*) FROM SCHOLARSHIP WHERE USER_ID = #{userId}
+	</select>
+	
+	<!-- 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점) -->
+	<select id="gradeInfo" resultType="map">
+		SELECT SUM(CLASS_CREDIT) AS CLASS_CREDIT, ROUND(AVG(SCORE),2) AS SCORE, ROUND(AVG(CREDIT),2) AS CREDIT 
+		FROM CLASS A, GRADE B WHERE A.C_IDX = B.C_IDX AND B.USER_ID = #{userId}
+	</select>
+	
+	<!-- 수업정보 -->
+	<select id="classInfo" resultType="map">
+		SELECT TITLE, CONTENT, NAME, L_CNT, F_CNT, LEVELS, TIME, A.TYPE, A.SEMESTER, CLASS_CREDIT 
+		FROM CLASS A, USERS B WHERE B.USER_ID = #{userId} AND C_IDX = #{cIdx}
 	</select>
 	
 </mapper>

@@ -16,7 +16,7 @@
 }
 
 .logo {
-	width: 250px;
+	width: 340px;
     margin-bottom: 20px;
 }
 
@@ -73,7 +73,7 @@ input[type="password"] {
 <body>
 <c:if test="${empty login }">
 	<div class="login">
-		<a href="<%=request.getContextPath()%>/potal"><input type="image" src="<%=request.getContextPath()%>/resources/img/logo1.PNG" class="logo"></a>
+		<a href="<%=request.getContextPath()%>/potal"><input type="image" src="<%=request.getContextPath()%>/resources/img/logo2.PNG" class="logo"></a>
 		<form method="POST" action="loginCheck" id="loginForm">
 			<input type="text" name="id" placeholder="아이디를 입력해주세요."><br>
 			<input type="password" name="pwd" placeholder="비밀번호를 입력해주세요."><br>

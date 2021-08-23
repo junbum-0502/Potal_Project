@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Class;
 import com.jun.potal.vo.Grade;
 import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
@@ -79,8 +80,33 @@ public class UserDao {
 		return sqlSession.selectList("User.major", user);
 	}
 	
-	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 조회
+	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 총액 조회
 		return sqlSession.selectList("User.semesterScholar", sch);
 	}
+	
+	public List<Scholarship> sch(Scholarship sch) throws Exception { // 장학금 학기별 조회
+		return sqlSession.selectList("User.sch", sch);
+	}
+	
+	public List<Scholarship> allSch(Scholarship sch) throws Exception { // 장학금 전체 조회
+		return sqlSession.selectList("User.allSch", sch);
+	}
+	
+	public int schCount(Scholarship sch) throws Exception { // 장학금 학기별 수 조회
+		return sqlSession.selectOne("User.schCount", sch);
+	}
+	
+	public int allSchCount(Scholarship sch) throws Exception { // 장학금 전체 수 조회
+		return sqlSession.selectOne("User.allSchCount", sch);
+	}
+	
+	public List<Grade> gradeInfo(Grade grade) throws Exception { // 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점)
+		return sqlSession.selectList("User.gradeInfo", grade);
+	}
 
+	
+	public List<Class> classInfo(Class cla) throws Exception { // 수업정보
+		return sqlSession.selectList("User.classInfo", cla);
+	}
+	
 }

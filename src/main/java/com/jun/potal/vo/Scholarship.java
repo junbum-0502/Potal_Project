@@ -7,11 +7,20 @@ public class Scholarship {
 	private int userId;
 	private String amount;
 	private String semester;
+	private String name;
 	
 	@Override
 	public String toString() {
 		return "Scholarship [sIdx=" + sIdx + ", siIdx=" + siIdx + ", userId=" + userId + ", amount=" + amount
-				+ ", semester=" + semester + "]";
+				+ ", semester=" + semester + ", name=" + name + "]";
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getSemester() {

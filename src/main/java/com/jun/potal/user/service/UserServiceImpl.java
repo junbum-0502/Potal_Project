@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jun.potal.user.dao.UserDao;
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Class;
 import com.jun.potal.vo.Grade;
 import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
@@ -97,10 +98,38 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 조회
+	public List<Scholarship> semesterScholar(Scholarship sch) throws Exception { // 장학금 학기별 총액 조회
 		return uDao.semesterScholar(sch);
 	}
 	
+	@Override
+	public List<Scholarship> sch(Scholarship sch) throws Exception { // 장학금 학기별 조회
+		return uDao.sch(sch);
+	}
 	
+	@Override
+	public List<Scholarship> allSch(Scholarship sch) throws Exception { // 장학금 전체 조회
+		return uDao.allSch(sch);
+	}
+	
+	@Override
+	public int schCount(Scholarship sch) throws Exception { // 장학금 학기별 수 조회
+		return uDao.schCount(sch);
+	}
+	
+	@Override
+	public int allSchCount(Scholarship sch) throws Exception { // 장학금 전체 수 조회
+		return uDao.allSchCount(sch);
+	}
+	
+	@Override
+	public List<Grade> gradeInfo(Grade grade) throws Exception { // 전체 성적 조회 페이지 정보(총 학점, 총 실점, 총 점)
+		return uDao.gradeInfo(grade);
+	}
+	
+	@Override
+	public List<Class> classInfo(Class cla) throws Exception { // 수업정보
+		return uDao.classInfo(cla);
+	}
 
 }
