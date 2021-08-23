@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.jun.potal.common.paging.Paging;
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Rent;
 import com.jun.potal.vo.User;
 
 @Repository
@@ -17,12 +18,14 @@ public class BookDao {
 	private SqlSession sqlSession;
 	
 	public List<Book> selectBook(Paging paging) throws Exception{
-		
+		System.out.println("북다오1 : " + paging.toString());
+		System.out.println("북다오1 : " + sqlSession.selectList("Book.selectBookSearch",paging).toString()); 
 		return sqlSession.selectList("Book.selectBook",paging);
 	}
 	
 	public List<Book> selectBookSearch(Paging paging) throws Exception{
-		
+		System.out.println("북다오2 : " + paging.toString());
+		System.out.println("북다오2 : " + sqlSession.selectList("Book.selectBookSearch",paging).toString()); 
 		return sqlSession.selectList("Book.selectBookSearch",paging);
 	}
 	
@@ -46,8 +49,20 @@ public class BookDao {
 		return sqlSession.selectOne("Book.selectContentCnt");
 	}
 	
+	public int selectContentCntSearch(Book book) throws Exception{
+		return sqlSession.selectOne("Book.selectContentCntSearch",book);
+	}
+	
 	public List<Book> abcSelect(Book book) throws Exception{
 		return sqlSession.selectList("Book.abcSelect",book);
+	}
+	
+	public int delRentHis(Rent rent) throws Exception{
+		return sqlSession.delete("Book.delRentHis",rent);
+	}
+	
+	public int upRentHis(int bIdx) throws Exception{
+		return sqlSession.update("Book.upRentHis",bIdx);
 	}
 	
 }

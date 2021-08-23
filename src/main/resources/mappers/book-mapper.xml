@@ -14,6 +14,16 @@
 		<result property="regDate" column="reg_date"/>
 		<result property="rentCnt" column="rent_cnt"/>
 	</resultMap>
+	
+	<resultMap type="Rent" id="rent">
+		<id property="rIdx" column="r_idx"/>
+		<result property="userId" column="user_id"/>
+		<result property="bIdx" column="b_idx"/>
+		<result property="allow" column="allow"/>
+		<result property="returnDate" column="return_date"/>
+		<result property="title" column="title"/>
+		<result property="regDate" column="regdate"/>
+	</resultMap>
 
 	
 	<select id="selectBook" resultType="map">
@@ -36,9 +46,11 @@
  			from(
  				select *
  				from book
+ 				where title LIKE  '%'||#{title}||'%' and author LIKE '%'||#{author}||'%'
  				order by ${sort} ${direction}
  			) b
- 		) where (rnum between #{queryStart} and #{queryEnd}) and (title like '%' || #{title} ||'%' and author like '%' || #{author} || '%')
+ 		) where (rnum between #{queryStart} and #{queryEnd})
+ 		<!-- and title LIKE '%'||#{title}||'%' and author LIKE '%'||#{author}||'%'  -->
 	</select>
 
 	<select id="selectBookByBidx" resultType="map">
@@ -46,7 +58,8 @@
 	</select>
 	
 	<insert id="insertRentData">
-	INSERT INTO RENT(R_IDX,USER_ID,B_IDX,ALLOW,RETURN_DATE) VALUES(SC_RENT_DATA.NEXTVAL,#{bookAmt},#{bIdx},0,SYSDATE+7)
+	INSERT INTO RENT(R_IDX,USER_ID,B_IDX,ALLOW,RETURN_DATE,TITLE) VALUES(SC_RENT_DATA.NEXTVAL,#{bookAmt},#{bIdx},0,SYSDATE+7,
+	(SELECT TITLE FROM BOOK WHERE B_IDX = #{bIdx}))
 	</insert>
 
 	<update id="updateBookAmt">
@@ -54,16 +67,28 @@
 	</update>
 	
 	<select id="selectRentHis" resultType="map">
-	SELECT * FROM RENT WHERE USER_ID = #{userId}
+	SELECT * FROM RENT WHERE USER_ID = #{userId} ORDER BY R_IDX ASC
 	</select>
 	
 	<select id="selectContentCnt" resultType="int">
 	select count(*) from book
 	</select>
+	
+	<select id="selectContentCntSearch" resultType="int">
+	select count(*) from book where title LIKE  '%'||#{title}||'%' and author LIKE '%'||#{author}||'%'
+	</select>
 
 	<select id="abcSelect" resultType="map">
 	SELECT * FROM BOOK WHERE (title like '%' || #{title} ||'%' and author like '%' || #{author} || '%')
 	</select>
+	
+	<delete id="delRentHis">
+	DELETE FROM RENT WHERE R_IDX = #{rIdx} AND B_IDX = #{bIdx}
+	</delete>
+	
+	<update id="upRentHis">
+	UPDATE BOOK SET BOOK_AMT=BOOK_AMT+1, RENT_CNT=RENT_CNT-1 WHERE B_IDX = #{BIDX} AND BOOK_AMT > 0
+	</update>
 
 </mapper>
 

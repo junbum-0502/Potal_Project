@@ -47,11 +47,8 @@
            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/potal">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+           <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/potal">
+                <div class="sidebar-brand-text mx-3">TB UNIVERSITY</div>
             </a>
 
             <!-- Divider -->
@@ -200,10 +197,10 @@
                         </c:if>
                          <c:if test="${!empty login }"> <!-- 로그인 -->
                         <a class="collapse-item" href="/potal/book">도서 조회/대출</a>
-                        <form method="GET" action="potal/rentHistory" id="rentForm">
+                        <form method="POST" action="/potal/rentHistory" id="rentForm">
 	                        <c:forEach var="User" items="${login}" varStatus="status">   
 	                        <input type="hidden" value="${User.userId }" name="userId">  
-	                        <a class="collapse-item" onclick="test();">대출조회</a>         
+	                        <a class="collapse-item" onclick="test();">대출내역 조회</a>         
 	                        </c:forEach>                 
                         </form>
                         </c:if>
