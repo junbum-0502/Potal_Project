@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jun.potal.vo.Book;
+import com.jun.potal.vo.Class;
 import com.jun.potal.vo.Grade;
 import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
@@ -103,4 +104,9 @@ public class UserDao {
 		return sqlSession.selectList("User.gradeInfo", grade);
 	}
 
+	
+	public List<Class> classInfo(Class cla) throws Exception { // 수업정보
+		return sqlSession.selectList("User.classInfo", cla);
+	}
+	
 }

@@ -102,7 +102,7 @@ input[type="text"] {
 }
 
 .logo {
-	width: 250px;
+	width: 340px;
     margin-bottom: 20px;
 }
 
@@ -140,7 +140,7 @@ input[type="text"] {
 </head>
 <body>
 	<div class="find">
-		<a href="<%=request.getContextPath()%>/potal"><input type="image" src="<%=request.getContextPath()%>/resources/img/logo1.PNG" class="logo"></a>
+		<a href="<%=request.getContextPath()%>/potal"><input type="image" src="<%=request.getContextPath()%>/resources/img/logo2.PNG" class="logo"></a>
 		<aside id="main_aside">
 		    <input type="radio" name="tab" id="first" checked>
 		    <input type="radio" name="tab" id="second">

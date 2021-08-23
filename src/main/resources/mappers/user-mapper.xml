@@ -66,12 +66,12 @@
 	
 	<!-- 메세지 전송 -->
 	<insert id="sendMessage">
-		INSERT INTO MESSAGE VALUES (SEQ_MESSAGE.NEXTVAL, #{userId}, 999, SYSDATE, #{content})
+		INSERT INTO MESSAGE VALUES (SEQ_MESSAGE.NEXTVAL, #{userId}, #{rId}, SYSDATE, #{content})
 	</insert>
 	
 	<!-- 메세지 출력 -->
 	<select id="readMessage" resultType="map">
-		SELECT * FROM MESSAGE WHERE USER_ID = #{userId} AND R_ID = 999
+		SELECT USER_ID, R_ID, CONTENT, TO_CHAR(REGDATE, 'YYYY/MM/DD HH24:MI') AS REGDATE FROM MESSAGE WHERE (USER_ID = #{userId} AND R_ID = #{rId}) OR (USER_ID = #{rId} AND R_ID = #{userId}) ORDER BY REGDATE ASC
 	</select>
 	
 	<!-- 프로필 사진 업로드 -->
@@ -140,5 +140,10 @@
 		FROM CLASS A, GRADE B WHERE A.C_IDX = B.C_IDX AND B.USER_ID = #{userId}
 	</select>
 	
-
+	<!-- 수업정보 -->
+	<select id="classInfo" resultType="map">
+		SELECT TITLE, CONTENT, NAME, L_CNT, F_CNT, LEVELS, TIME, A.TYPE, A.SEMESTER, CLASS_CREDIT 
+		FROM CLASS A, USERS B WHERE B.USER_ID = #{userId} AND C_IDX = #{cIdx}
+	</select>
+	
 </mapper>

@@ -85,7 +85,7 @@
                        	</c:if>
                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         	<c:forEach var="info" items="${login }" varStatus="status">
-		                    	<form method="POST" action="<%=request.getContextPath()%>/potal/schedule" id="schForm">	
+		                    	<form method="POST" action="<%=request.getContextPath()%>/potal/scheduleIndex" id="schForm">	
 		                    		<input type="hidden" value="${info.userId }" name="userId">
 	                       			<a class="collapse-item" onclick="onSubmit();">수업시간표</a>	
 		                        </form>

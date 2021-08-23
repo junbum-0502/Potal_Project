@@ -48,10 +48,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/potal">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">TB UNIVERSITY</div>
             </a>
 
             <!-- Divider -->
@@ -88,7 +85,7 @@
                        	</c:if>
                         <c:if test="${!empty login }"> <!-- 로그인 -->
                         	<c:forEach var="info" items="${login }" varStatus="status">
-		                    	<form method="POST" action="<%=request.getContextPath()%>/potal/schedule" id="schForm">	
+		                    	<form method="POST" action="<%=request.getContextPath()%>/potal/scheduleIndex" id="schForm">	
 		                    		<input type="hidden" value="${info.userId }" name="userId">
 	                       			<a class="collapse-item" onclick="onSubmit();">수업시간표</a>	
 		                        </form>
@@ -162,7 +159,7 @@
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">등록금조회</a>
+                        <a class="collapse-item" href="<%=request.getContextPath()%>/potal/tuitionIndex">등록금조회</a>
                         <a class="collapse-item" href="register.html">등록금 납부확인서</a>
                     </div>
                 </div>
@@ -176,7 +173,9 @@
                 </a>
                 <div id="collapsePages1" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="login.html">장학금조회</a>
+                        <c:forEach var="info" items="${login }" varStatus="status">
+                        	<a class="collapse-item" href="<%=request.getContextPath()%>/potal/schIndex?userId=${info.userId}&name=${info.name}">장학금조회</a>
+                    	</c:forEach>
                     </div>
                 </div>
             </li>
