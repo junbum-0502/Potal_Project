@@ -114,7 +114,6 @@
 </body>
 
 <script>
-	
 
 	function delRent(bIdx,rIdx,id,title){
 
@@ -168,14 +167,17 @@
 		console.log(data[i]["TITLE"]);
 		console.log(data[i]["R_IDX"]);
 		console.log(data[i]["ALLOW"]);
+		var title = data[i]["TITLE"];
+		var rIdx = data[i]["R_IDX"];
+		var allow = data[i]["ALLOW"];
 		
 		if(data[i]["ALLOW"] == 0){
 			cv += "<tr><td>"+data[i]["R_IDX"]+"</td><td>"+data[i]["B_IDX"]+"</td><td><a id='titleColor' href='/potal/bookInfo?bIdx="+data[i]["B_IDX"]+"'>"+data[i]["TITLE"]+"</a></td>"
 					+"<td>"+data[i]["REGDATE"]+"</td><td>"+data[i]["RETURN_DATE"]+"</td>"
-					+"<td id='cancelRent'>신청완료<a id='canBtn' onclick='delRent("+data[i]["B_IDX"]+","+data[i]["R_IDX"]+","+data[i]["USER_ID"]+","+data[i]["TITLE"]+")'>(취소하기)</a>"
-					+"<input type='hidden' value = '"+data[i]["R_IDX"]+"' id='CRIDX'>"
-					+"<input type='hidden' value = '"+data[i]["B_IDX"]+"' id='CBIDX'>"
-					+"<input type='hidden' value = '"+data[i]["TITLE"]+"' id='Ctitle'></td></tr>";
+					+"<td id='cancelRent'>신청완료<a id='canBtn' onclick='delRent(\""+data[i]["B_IDX"]+"\",\""+data[i]["R_IDX"]+"\",\""+data[i]["USER_ID"]+"\",\""+data[i]["TITLE"]+"\")'>(취소하기)</a>"
+					+"<input type='hidden' value="+data[i]["R_IDX"]+" id='CRIDX'>"
+					+"<input type='hidden' value="+data[i]["B_IDX"]+" id='CBIDX'>"
+					+"<input type='hidden' value="+data[i]["TITLE"]+" id='Ctitle'></td></tr>";
 		}else if(data[i]["ALLOW"] == 1){
 			cv += "<tr><td>"+data[i]["R_IDX"]+"</td><td>"+data[i]["B_IDX"]+"</td><td><a id='titleColor' href='/potal/bookInfo?bIdx="+data[i]["B_IDX"]+"'>"+data[i]["TITLE"]+"</a></td>"
 					+"<td>"+data[i]["REGDATE"]+"</td><td>"+data[i]["RETURN_DATE"]+"</td>"
