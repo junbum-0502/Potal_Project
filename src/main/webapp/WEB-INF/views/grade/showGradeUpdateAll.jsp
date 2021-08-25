@@ -4,17 +4,41 @@
 
 <head>
 
+	<style type="text/css">
+	
+	h2{
+		width:500px;
+		margin-left: 300px;
+		color:rgb(051,051,102);
+		font-weight: bold;
+	}
+	 
+	.backPage{
+		margin-left: 310px;
+	}
+	
+	.subList{
+		margin-left: 300px; 
+	}
+	
+	</style>
+
 </head>
 <body>
 
-	내가 수업하는 과목 리스트<br><br><hr>
-
+	<br>
+	<h2 >성적수정</h2>
+	<div class="backPage" style="width:80vw;">
+		<a style="color: gray"> <i class="fas fa-graduation-cap"></i></a> > 과목선택<br>
+	</div>
+	<br><br>
+	
+	<div class="subList"> 
 	<c:forEach var="score" items="${gList }" varStatus="status">
 		<a href="/potal/updateGrade?pId=${score.USER_ID}&cIdx=${score.C_IDX}">과목명(과목번호) : ${score.TITLE}(<small>${score.C_IDX}</small>)<br></a>
-<%-- 		<a href="#">과목명(과목번호) : ${score.TITLE}(<small>${score.C_IDX}</small>)<br></a> --%>
 		<hr>
 	</c:forEach>
-	
+	</div>
 
 	
 

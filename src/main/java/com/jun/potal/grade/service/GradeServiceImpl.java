@@ -86,10 +86,11 @@ public class GradeServiceImpl implements GradeService{
 		return gradeDao.studentInfoGradeAllSchedule(schedule);
 	}
 
-	/*
-	 * @Override public List<Grade> selectScoreById(Grade grade) throws Exception {
-	 * 
-	 * return gradeDao.selectScoreById(grade); }
-	 */
+	@Override
+	public List<Grade> selectScoreById(Grade grade) throws Exception {
+		// TODO Auto-generated method stub
+		return gradeDao.selectScoreById(grade);
+	}
+
 
 }

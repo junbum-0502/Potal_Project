@@ -12,8 +12,6 @@ public interface GradeService {
 	
 	List<Schedule> selectScoreAll(Schedule schedule) throws Exception;
 	
-	/* List<Grade> selectScoreById(Grade grade) throws Exception; */
-	
 	int insertScoreByIdx(Grade grade) throws Exception;
 	
 	List<Grade> selectClassUpdateAll(Grade grade) throws Exception; // 성적 수정 과목리스트
@@ -33,5 +31,7 @@ public interface GradeService {
 	List<Grade> studentInfoGradeAllGrade(Grade grade) throws Exception; // 전체성적 조회
 	
 	List<Schedule> studentInfoGradeAllSchedule(Schedule schedule) throws Exception; // 수강 목록 조회
+	
+	List<Grade> selectScoreById(Grade grade) throws Exception;
 	
 }

@@ -28,10 +28,10 @@ public class GradeDao {
 	public int insertScoreByIdx(Grade grade) throws Exception{
 		return sqlSession.insert("Grade.insertScoreByIdx",grade);
 	}
-	/*
-	 * public List<Grade> selectScoreById(Grade grade) throws Exception{ return
-	 * sqlSession.selectList("Grade.selectScoreById",grade); }
-	 */
+	
+	public List<Grade> selectScoreById(Grade grade) throws Exception{ 
+		return sqlSession.selectList("Grade.selectScoreById",grade); 
+	} 
 	
 	public List<Grade> selectClassUpdateAll(Grade grade) throws Exception{
 		

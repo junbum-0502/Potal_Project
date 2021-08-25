@@ -28,16 +28,14 @@
 	}
 	
 	.backPage{
-		transform:translateX(100px);
+		margin-left: 310px;
 	}
 	
 	h2{
 		width:500px;
-		transform:translateX(100px);
+		margin-left: 300px;
 		color:rgb(051,051,102);
 		font-weight: bold;
-		
-
 	}
 	
 	#canBtn,#longBtn{
@@ -59,7 +57,7 @@
 	
 	<br>
 	<h2 >대출내역</h2>
-	<div class="backPage" style="width:90vw;">
+	<div class="backPage" style="width:80vw;">
 		<a style="color: gray"><i class="fas fa-book"></i></a> > 대출내역<br>
 	</div>
 	<br>

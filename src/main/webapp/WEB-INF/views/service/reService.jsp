@@ -37,7 +37,7 @@
 	
 	h2{
 		width:500px;
-		transform:translateX(100px);
+		margin-left: 300px;
 		color:rgb(051,051,102);
 		font-weight: bold;
 		margin-top: 30px;
@@ -54,7 +54,7 @@
 	}
 	
 	.backPage{
-		transform:translateX(100px);
+		margin-left: 310px;
 	}
 	
 	.info{
@@ -83,7 +83,7 @@
 <body>
 
 	<h2>복학 신청</h2>
-	<div class="backPage" style="width:90vw;">
+	<div class="backPage" style="width:80vw;">
 		<a style="color: gray" href="/potal/serviceList"> <i class="fab fa-hire-a-helper"></i></a> > 복학 신청<br>
 	</div>
 	

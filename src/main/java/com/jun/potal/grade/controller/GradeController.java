@@ -48,30 +48,23 @@ public class GradeController {
 		int userId = Integer.parseInt(uId);
 		/* System.out.println(userId); */
 		schedule.setProId(userId);
-		grade.setProId(userId);
+		
 
 		String cidx = request.getParameter("cIdx");
 		int idx = Integer.parseInt(cidx);
 		/* System.out.println(idx); */
 		schedule.setcIdx(idx);
-		grade.setcIdx(idx);
 
 		List<Schedule> sList = new ArrayList<Schedule>();
 		sList = gradeService.selectScoreAll(schedule);
-		
-		/*
-		 * List<Grade> aList = new ArrayList<Grade>(); aList =
-		 * gradeService.selectScoreById(grade);
-		 */
-		
-		model.addAttribute("sList", sList);
-		/* model.addAttribute("aList", aList); */
+				
+		model.addAttribute("sList", sList);		
 
 		return "grade/showScoreAll";
 	}
 
 	@GetMapping("putScore")
-	public String updatePageMove(HttpServletRequest request, Model model) throws Exception {
+	public String updatePageMove(HttpServletRequest request, Model model,Grade grade) throws Exception {
 
 		String name = request.getParameter("name");
 		model.addAttribute("name", name);
@@ -84,7 +77,14 @@ public class GradeController {
 		String proid = request.getParameter("pid"); 
 		int pid = Integer.parseInt(proid);
 		model.addAttribute("pid",pid);
-		 
+		 		
+		grade.setUserId(uid);
+		grade.setcIdx(cIdx);
+
+		List<Grade> aList = new ArrayList<Grade>(); 
+		aList = gradeService.selectScoreById(grade);
+		model.addAttribute("aList", aList);
+		
 		return "grade/putScore";
 	}
 	

@@ -11,8 +11,10 @@
 		width:1100px;
 		height:520px;
 		border: 1px solid;
+		position: absolute;
+  		left: 400px;
 	}
-	
+	 
 	.bInfoDiv{
 		width:1000px;
 		margin: auto;
@@ -25,8 +27,13 @@
 		height:40px;
 		margin-top: 50px;
 	    transform: translateX(-50px);
+        position: absolute;
+	    top: 750px;
+	    left: 450px;
+	    width: 150px;
+	    height: 40px;
 	}
-	
+	 
 	.bInfoBtn:hover{
 		background-color: #224abe;
 	}
@@ -43,10 +50,11 @@
 	
 	h2{
 		width:500px;
-		transform:translateX(100px);
+		margin-left: 300px;
 		color:rgb(051,051,102);
 		font-weight: bold;
 	}
+	 
 	
 	#titleDiv{
 		width:800px;
@@ -85,10 +93,14 @@
 	.bookImg{
 		width:180px;
 		height: 250px;
-	}
-	
+		position: absolute;
+	    left: 150px;
+	    top: -230px;
+
+	} 
+	  
 	.backPage{
-		transform:translateX(100px);
+		margin-left: 310px;
 	}
 
 	#storyInfo{
@@ -109,7 +121,7 @@
 
 	<br>
 	<h2 >상세정보</h2>
-	<div class="backPage" style="width:90vw;">
+	<div class="backPage" style="width:80vw;">
 		<a href="/potal/book" style="color: gray"><i class="fas fa-book"></i></a> > 대출신청<br>
 	</div>
 	<br>
@@ -164,7 +176,8 @@
 			</div>
 			
 			</div>
-					
+		
+		<input type="hidden" value="${book.TITLE}" id="title">
 		<input type="hidden" value="${book.BOOK_AMT}" id="amt">
 		<input type="hidden" value="${book.B_IDX}" id="idx">
 		</c:forEach>
@@ -183,11 +196,18 @@
 	// 도서재고가 1권이상일 때 대출가능
 	function rent() {
 		
+		var title = document.getElementById("title").value;
 		var amt = document.getElementById("amt").value;
 		var idx = document.getElementById("idx").value;
 		var id = document.getElementById("id").value;
 		console.log(amt);
-
+	
+		var check = confirm(title+"\n해당 도서를 대출하시겠습니까?");
+		
+		if(check == false){
+			return;
+		}
+		 
 		if(amt > 0){
 			alert("대출신청이 완료되었습니다.\n도서목록 페이지로 이동합니다.");
 			location.href="/potal/rent?bIdx="+idx+"&id="+id

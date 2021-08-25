@@ -63,7 +63,7 @@
 	
 	<update id="updateScoreByIdx">
 	UPDATE GRADE SET MID_SCORE = #{midScore}, FINAL_SCORE = #{finalScore}, SCORE = #{score}, GRADE = #{grade}, CREDIT = ${credit}, YEAR_SEMESTER = #{yearSemester}
-	WHERE USER_ID = #{userId}
+	WHERE USER_ID = #{userId} AND C_IDX=#{cIdx}
 	</update>
 	
 	<select id="selectUpdateScoreByid" resultType="map">
@@ -92,6 +92,10 @@
 	
 	<select id="studentInfoGradeAllSchedule" resultType="map">
 	SELECT * FROM SCHEDULE WHERE USER_ID = #{userId}
+	</select>
+	
+	<select id="selectScoreById" resultType="map">
+	SELECT * FROM GRADE WHERE USER_ID = #{userId} AND C_IDX = #{cIdx}
 	</select>
 
 </mapper>
