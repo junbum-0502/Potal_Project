@@ -119,6 +119,12 @@ public class BookServiceImpl implements BookService{
 		return bookDao.upRentHis(bIdx); 
 	}
 
+	@Override
+	public int upRentReturn(int rIdx) throws Exception {
+		// TODO Auto-generated method stub
+		return bookDao.upRentReturn(rIdx); 
+	}
+
 
 
 

@@ -72,7 +72,7 @@ public class ServiceController {
 		
 		ServiceService.insertServiceHistory(serviceHistory);
 		
-		return "redirect:/potal";
+		return "redirect:/potal/reqService?userId="+id;
 	}
 	
 	// 민원신청내역

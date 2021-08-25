@@ -190,6 +190,30 @@ public class bookController {
 		return jsonOutput; 
 	}
 	
+	@PostMapping(value = "upRentReturn", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String upRentReturn(HttpServletRequest request,User user) throws Exception{
+		
+		String rdx = request.getParameter("rIdx");
+		String id = request.getParameter("id");
+		
+		int rIdx = Integer.parseInt(rdx);
+		int uId = Integer.parseInt(id);
+		
+		System.out.println(rIdx);
+		System.out.println(uId);
+		
+		user.setUserId(uId);
+		
+		bookService.upRentReturn(rIdx); // 기간연장
+		
+		List<User> rList = bookService.selectRentHis(user);
+		Gson gson1 = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson1.toJson(rList);
+		
+		return jsonOutput; 
+	}
+	
 
 	
 }

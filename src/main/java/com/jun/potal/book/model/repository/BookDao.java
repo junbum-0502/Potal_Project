@@ -65,4 +65,8 @@ public class BookDao {
 		return sqlSession.update("Book.upRentHis",bIdx);
 	}
 	
+	public int upRentReturn(int rIdx) throws Exception{
+		return sqlSession.update("Book.upRentReturn",rIdx);
+	}
+	
 }

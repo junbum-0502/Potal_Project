@@ -11,6 +11,8 @@
 			border-left: none;
 			border-bottom: none;
 			border-right: none;
+			position: absolute;
+			position: absolute;
 		}
 		
 			
@@ -70,8 +72,8 @@
 	               <th style="width: 150px; height:20%;"><span>대출번호</span></th>
 	               <th style="width: 150px; height:20%;"><span>도서번호</span></th>
 	               <th style="width: 800px;"><span>도서 제목</span></th>
-	               <th style="width: 200px;"><span>대출신청일자</span></th>
-	               <th style="width: 200px;"><span>대출가능기간</span></th>
+	               <th style="width: 150px;"><span>대출신청일자</span></th>
+	               <th style="width: 150px;"><span>대출가능기간</span></th>
 	               <th id="cancelRent" style="width: 200px;"><span>대출 현황</span></th>
 	           </tr>
 	       </thead>
@@ -94,7 +96,7 @@
 		       					</td>   	       										
 		       				</c:when>
 		       				<c:when test="${rent.ALLOW == 1 }">
-		       				   	<td id="longRent">대출중<a id="longBtn" href="/potal/longRent">(연장하기)</a></td>
+		       				   	<td id="longRent">대출중<a id="longBtn" onclick="longRent('${rent.USER_ID}','${rent.R_IDX}','${rent.TITLE}')">(연장하기)</a></td>
 		       				</c:when>
 		       				<c:otherwise>
 		       					<td id="finRent">대출완료(반납)</td>      					
@@ -181,7 +183,7 @@
 		}else if(data[i]["ALLOW"] == 1){
 			cv += "<tr><td>"+data[i]["R_IDX"]+"</td><td>"+data[i]["B_IDX"]+"</td><td><a id='titleColor' href='/potal/bookInfo?bIdx="+data[i]["B_IDX"]+"'>"+data[i]["TITLE"]+"</a></td>"
 					+"<td>"+data[i]["REGDATE"]+"</td><td>"+data[i]["RETURN_DATE"]+"</td>"
-					+"<td id='longRent'>대출중<a id='longBtn' href='potal/longRent'>(연장하기)</a></td></tr>";
+					+"<td id='longRent'>대출중<a id='longBtn' onclick='longRent(\""+data[i]["USER_ID"]+"\",\""+data[i]["R_IDX"]+"\",\""+data[i]["TITLE"]+"\")'>(연장하기)</a></td></tr>";
 		}else{
 			cv += "<tr><td>"+data[i]["R_IDX"]+"</td><td>"+data[i]["B_IDX"]+"</td><td><a id='titleColor' href='/potal/bookInfo?bIdx="+data[i]["B_IDX"]+"'>"+data[i]["TITLE"]+"</a></td>"
 					+"<td>"+data[i]["REGDATE"]+"</td><td>"+data[i]["RETURN_DATE"]+"</td>"
@@ -195,6 +197,77 @@
 		})
 		
 		alert("대출신청이 취소처리 되었습니다.");
+	 	$("#resultR").append(cv);
+		
+	}
+	
+	function longRent(id,rIdx,title){
+		
+		var check = confirm("대출번호 "+rIdx+"\n'"+title+"' \n대출기간을 연장합니다");
+		console.log("취소여부 : "+ check);
+		
+		if(check == false){
+			return;
+		}
+		
+		$.ajax({
+			url : "upRentReturn",
+			type : "POST",
+			data : {
+				rIdx : rIdx,
+				id : id
+			},
+			dataType : "JSON",
+			success : longList,
+			error : function(error) {
+				console.log("에러발생");
+			}			
+		})
+		
+	}
+	
+	function longList(data){
+		
+		var cv = "";
+		var cnt = 0;
+		
+		$("#resultR").empty();
+		
+		console.log("data : "+data);
+		
+		$.each(data, function(i, map) {
+			
+		console.log(data[i]);
+		cnt = data.length;
+
+		var title = data[i]["TITLE"];
+		var rIdx = data[i]["R_IDX"];
+		var allow = data[i]["ALLOW"];
+		
+		if(data[i]["ALLOW"] == 0){
+			cv += "<tr><td>"+data[i]["R_IDX"]+"</td><td>"+data[i]["B_IDX"]+"</td><td><a id='titleColor' href='/potal/bookInfo?bIdx="+data[i]["B_IDX"]+"'>"+data[i]["TITLE"]+"</a></td>"
+					+"<td>"+data[i]["REGDATE"]+"</td><td>"+data[i]["RETURN_DATE"]+"</td>"
+					+"<td id='cancelRent'>신청완료<a id='canBtn' onclick='delRent(\""+data[i]["B_IDX"]+"\",\""+data[i]["R_IDX"]+"\",\""+data[i]["USER_ID"]+"\",\""+data[i]["TITLE"]+"\")'>(취소하기)</a>"
+					+"<input type='hidden' value="+data[i]["R_IDX"]+" id='CRIDX'>"
+					+"<input type='hidden' value="+data[i]["B_IDX"]+" id='CBIDX'>"
+					+"<input type='hidden' value="+data[i]["TITLE"]+" id='Ctitle'></td></tr>";
+		}else if(data[i]["ALLOW"] == 1){
+			cv += "<tr><td>"+data[i]["R_IDX"]+"</td><td>"+data[i]["B_IDX"]+"</td><td><a id='titleColor' href='/potal/bookInfo?bIdx="+data[i]["B_IDX"]+"'>"+data[i]["TITLE"]+"</a></td>"
+					+"<td>"+data[i]["REGDATE"]+"</td><td>"+data[i]["RETURN_DATE"]+"</td>"
+					+"<td id='longRent'>대출중<a id='longBtn' onclick='longRent(\""+data[i]["USER_ID"]+"\",\""+data[i]["R_IDX"]+"\",\""+data[i]["TITLE"]+"\")'>(연장하기)</a></td></tr>";
+		}else{
+			cv += "<tr><td>"+data[i]["R_IDX"]+"</td><td>"+data[i]["B_IDX"]+"</td><td><a id='titleColor' href='/potal/bookInfo?bIdx="+data[i]["B_IDX"]+"'>"+data[i]["TITLE"]+"</a></td>"
+					+"<td>"+data[i]["REGDATE"]+"</td><td>"+data[i]["RETURN_DATE"]+"</td>"
+					+"<td id='finRent'>대출완료(반납)</td></tr>";
+		}
+
+		
+		
+		console.log(cv);
+			
+		})
+		
+		alert("대출연장이 정상처리 되었습니다.");
 	 	$("#resultR").append(cv);
 		
 	}

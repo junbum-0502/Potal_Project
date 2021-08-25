@@ -67,7 +67,8 @@
 	</update>
 	
 	<select id="selectRentHis" resultType="map">
-	SELECT * FROM RENT WHERE USER_ID = #{userId} ORDER BY R_IDX ASC
+	SELECT R_IDX,B_IDX,USER_ID,ALLOW,TITLE,TO_CHAR(RETURN_DATE,'YYYY-MM-DD') AS RETURN_DATE,TO_CHAR(REGDATE,'YYYY-MM-DD') AS REGDATE 
+		FROM RENT WHERE USER_ID = #{userId} ORDER BY R_IDX ASC
 	</select>
 	
 	<select id="selectContentCnt" resultType="int">
@@ -90,6 +91,10 @@
 	UPDATE BOOK SET BOOK_AMT=BOOK_AMT+1, RENT_CNT=RENT_CNT-1 WHERE B_IDX = #{BIDX} AND BOOK_AMT > 0
 	</update>
 
+	<update id="upRentReturn">
+	UPDATE RENT SET RETURN_DATE=RETURN_DATE+7 WHERE R_IDX = #{RIDX}
+	</update>
+	
 </mapper>
 
 

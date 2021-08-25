@@ -24,6 +24,8 @@ public interface BookService {
 	
 	int upRentHis(int bIdx) throws Exception;
 	
+	int upRentReturn(int rIdx) throws Exception; // 대출 기간 연장
+	
 	List<Book> abcSelect(Book book) throws Exception;
 	
 }

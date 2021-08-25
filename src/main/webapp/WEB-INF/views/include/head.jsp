@@ -395,6 +395,10 @@
 		rentForm.submit();
 	}
 	
+	function test1() {
+		serForm.submit();
+	}
+	
 	function onSubmit() {
 		console.log("아아");
 		$("#schForm").submit();

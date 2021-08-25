@@ -62,6 +62,10 @@
 		color:rgb(051,051,102);
 		font-weight: bold;	
 	}
+	
+	.book_div{
+		
+	}
 
 
 </style>
