@@ -40,10 +40,10 @@
 	<br>
 	<h2 >상세정보</h2>
 	<div class="backPage" style="width:90vw;">
-		<a style="color: gray"><i class="fas fa-book"></i></a> > 민원 신청내역<br>
+		<a style="color: gray"><i class="fab fa-hire-a-helper"></i></a> > 민원 신청내역<br>
 	</div>
 	<br><br>
-
+ 
 	<c:forEach var="serviceHis" items="${shList}" varStatus="status">
 		<table>
 			<tbody>

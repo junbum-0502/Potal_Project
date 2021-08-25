@@ -210,30 +210,40 @@
                 </div>
             </li>
             
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
-                    aria-expanded="true" aria-controls="collapsePages3">
-                    <i class="fab fa-hire-a-helper"></i>
-                    <span>서비스</span>
-                </a>
-                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                    	<c:if test="${empty login }"> <!-- 비로그인 -->
-                        <a class="collapse-item" onclick="notLog();">민원 조회/신청</a>
-                        </c:if>
-                         <c:if test="${!empty login }"> <!-- 로그인 -->
-                        <a class="collapse-item" href="/potal/serviceList">민원 조회/신청</a>
-                        <form method="GET" action="/potal/reqService" id="serForm">
-	                        <c:forEach var="User" items="${login}" varStatus="status">   
-	                        <input type="hidden" value="${User.userId }" name="userId">  
-	                         <a class="collapse-item" onclick="test1();">민원신청내역</a>       
-	                        </c:forEach>                 
-                        </form>
-                        </c:if>
-                       <!--  <a class="collapse-item" href="/potal/reqService">민원신청내역</a> -->
-                    </div>
-                </div>
-            </li>
+           <c:forEach var="info" items="${login }" varStatus="status">
+            
+	            <c:if test="${info.type eq 1 }">
+        	        <li class="nav-item">
+		                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages3"
+		                    aria-expanded="true" aria-controls="collapsePages3">
+		                    <i class="fab fa-hire-a-helper"></i>
+		                    <span>서비스</span>
+		                </a>
+		                <div id="collapsePages3" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+		                    <div class="bg-white py-2 collapse-inner rounded">
+		                    	<c:if test="${empty login }"> <!-- 비로그인 -->
+		                        <a class="collapse-item" onclick="notLog();">민원 조회/신청</a>
+		                        </c:if>
+		                        
+		                         <c:if test="${!empty login }"> <!-- 로그인 -->                 
+		                        <a class="collapse-item" href="/potal/serviceList">민원 조회/신청</a>
+		                        <form method="GET" action="/potal/reqService" id="serForm">
+			                        <c:forEach var="User" items="${login}" varStatus="status">   
+			                        <input type="hidden" value="${User.userId }" name="userId">  
+			                         <a class="collapse-item" onclick="test1();">민원신청내역</a>       
+			                        </c:forEach>                 
+		                        </form>
+		                        </c:if>
+		                       <!--  <a class="collapse-item" href="/potal/reqService">민원신청내역</a> -->
+		                    </div>
+		                </div>
+            		</li>
+	            </c:if>
+	            <c:if test="${info.type eq 2 }">
+	            
+	            </c:if>
+            
+            </c:forEach>          
             
             <hr class="sidebar-divider">
             
