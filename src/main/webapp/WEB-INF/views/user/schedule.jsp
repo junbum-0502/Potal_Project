@@ -235,7 +235,7 @@ window.onload = function() {
 					console.log("시작 : " + data[i].S_TIME);
 					console.log("길이 : " + data[i].LENGTH);
 					var leng = data[i].S_TIME + data[i].LENGTH - 1;
-					cv += data[i].TITLE;
+					cv += "<a class='a' href='<%=request.getContextPath()%>/potal/class?userId=${id}&proId=" + data[i].PRO_ID + "&cIdx=" + data[i].C_IDX + "'>" + data[i].TITLE + "</a>";
 					cv += "<br>";
 					cv += data[i].P_NAME;
 					cv += "<br>";
@@ -249,7 +249,7 @@ window.onload = function() {
 					console.log("시작 : " + data[i].S_TIME);
 					console.log("길이 : " + data[i].LENGTH);
 					var leng = data[i].S_TIME + data[i].LENGTH - 1;
-					cv += data[i].TITLE;
+					cv += "<a class='a' href='<%=request.getContextPath()%>/potal/class?userId=${id}&proId=" + data[i].PRO_ID + "&cIdx=" + data[i].C_IDX + "'>" + data[i].TITLE + "</a>";
 					cv += "<br>";
 					cv += data[i].P_NAME;
 					cv += "<br>";
@@ -263,7 +263,7 @@ window.onload = function() {
 					console.log("시작 : " + data[i].S_TIME);
 					console.log("길이 : " + data[i].LENGTH);
 					var leng = data[i].S_TIME + data[i].LENGTH - 1;
-					cv += data[i].TITLE;
+					cv += "<a class='a' href='<%=request.getContextPath()%>/potal/class?userId=${id}&proId=" + data[i].PRO_ID + "&cIdx=" + data[i].C_IDX + "'>" + data[i].TITLE + "</a>";
 					cv += "<br>";
 					cv += data[i].P_NAME;
 					cv += "<br>";
@@ -277,7 +277,7 @@ window.onload = function() {
 					console.log("시작 : " + data[i].S_TIME);
 					console.log("길이 : " + data[i].LENGTH);
 					var leng = data[i].S_TIME + data[i].LENGTH - 1;
-					cv += data[i].TITLE;
+					cv += "<a class='a' href='<%=request.getContextPath()%>/potal/class?userId=${id}&proId=" + data[i].PRO_ID + "&cIdx=" + data[i].C_IDX + "'>" + data[i].TITLE + "</a>";
 					cv += "<br>";
 					cv += data[i].P_NAME;
 					cv += "<br>";

@@ -191,14 +191,6 @@ input[type="password"] {
 			</td>
 		</c:if>
 		</tr>
-		<tr>
-			<td>
-				<div id="info">
-				</div>
-				<button id="btn_open">메세지</button>
-				<button id="btn_close">메세지닫기</button>
-			</td>
-		</tr>
 	</table>
 </c:forEach>
 </body>
@@ -336,7 +328,6 @@ input[type="password"] {
     		console.log(data[i].TUITION);
     		cv += "<p>등록금 : " + data[i].TUITION + " 원</p>"
     	})
-    	$("#info").append(cv);
     }
     
     function info_scholarship(data) {
@@ -346,7 +337,6 @@ input[type="password"] {
     		console.log(data[i].amount);
     		cv += "<p>장학금 : " + data[i].amount + " 원</p>"
     	})
-    	$("#info").append(cv);
     }
     
     function info_major(data) {

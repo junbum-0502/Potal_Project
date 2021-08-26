@@ -377,7 +377,6 @@ td {
 	    		cv3 += "Y";
 	    		cv4 += data[i].amount;
 	    	})
-	    	$("#info").append(cv);
 	    	$("#info2").append(cv3);
 	    	$("#info5").append(cv4);
     	} else if (data == "") {
