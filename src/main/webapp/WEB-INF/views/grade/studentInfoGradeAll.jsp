@@ -5,7 +5,6 @@
 <head>
 
 <style type="text/css">
-
 	h2{
 		width:500px;
 		margin-left: 300px;
@@ -18,7 +17,6 @@
 	}
 	
 	.infoTable,.infoTable1,.infoTable2 * {
-
 	
 	}
 	
@@ -245,7 +243,6 @@
 </body>
 
 <script>
-
 </script>
 
 </html>
