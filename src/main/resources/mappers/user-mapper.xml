@@ -146,4 +146,8 @@
 		FROM CLASS A, USERS B WHERE B.USER_ID = #{userId} AND C_IDX = #{cIdx}
 	</select>
 	
+	<select id="typeChoose" resultType="map">
+		SELECT * FROM USERS WHERE USER_ID = #{userId}
+	</select>
+	
 </mapper>

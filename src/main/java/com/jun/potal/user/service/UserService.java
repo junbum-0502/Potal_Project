@@ -57,4 +57,7 @@ public interface UserService {
 	
 	public List<Class> classInfo(Class cla) throws Exception; // 수업정보
 	
+	public List<User> typeChoose(int userId) throws Exception; // 메세지 교수 or 학생
+	
+	
 }

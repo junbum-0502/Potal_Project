@@ -406,6 +406,11 @@ public class UserCtrl {
 		cla.setUserId(Integer.valueOf(proId));
 		user.setUserId(Integer.valueOf(proId));
 		
+		String idid = request.getParameter("userId");
+		int uid = Integer.parseInt(idid);
+		List<User>pList  = adService.typeChoose(uid);
+		model.addAttribute("pList", pList);
+		
 		model.addAttribute("userId", userId);
 		model.addAttribute("proId", proId);
 		model.addAttribute("cIdx", cIdx);

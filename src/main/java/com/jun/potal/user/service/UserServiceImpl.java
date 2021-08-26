@@ -132,4 +132,10 @@ public class UserServiceImpl implements UserService {
 		return uDao.classInfo(cla);
 	}
 
+	@Override
+	public List<User> typeChoose(int userId) throws Exception { // 메세지 교수 or 학생
+		// TODO Auto-generated method stub
+		return uDao.typeChoose(userId);
+	}
+
 }

@@ -89,9 +89,12 @@ td {
 <c:forEach var="cla" items="${classList }" varStatus="status">
 <div class="classInfo">
 	<span class="intro">강의정보</span>
-	<button id="btn_open">메세지</button>
+	<c:forEach var="pcheck" items="${pList }" varStatus="status">
+	<c:if test="${pcheck.TYPE == 2}"></c:if>
+	<c:if test="${pcheck.TYPE == 1}"><button id="btn_open">메세지</button></c:if>
+	</c:forEach>
 	<table class="class">
-		<tr>
+		<tr> 
 			<td class="set1">학년</td>
 			<td class="set2">${cla.LEVELS }</td>
 			<td class="set1">학기</td>

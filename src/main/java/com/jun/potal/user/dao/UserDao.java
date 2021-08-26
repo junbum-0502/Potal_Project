@@ -109,4 +109,10 @@ public class UserDao {
 		return sqlSession.selectList("User.classInfo", cla);
 	}
 	
+	public List<User> typeChoose(int userId) throws Exception { // 메세지 교수 or 학생
+		return sqlSession.selectList("User.typeChoose", userId);
+	}
+	
+	
+	
 }

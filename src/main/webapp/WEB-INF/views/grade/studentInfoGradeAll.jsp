@@ -97,6 +97,8 @@
     	top: 620px;
     	color:rgb(051,051,102);
 	}
+	
+
 	  
 </style>
 
@@ -107,6 +109,7 @@
 	<h2 >학생조회</h2>
 	<div class="backPage" style="width:80vw;">
 		<a style="color: gray"> <i class="fas fa-graduation-cap"></i></a> > 학생선택 > 학생정보<br>
+		 
 	</div>
 	<br><br>
 	
