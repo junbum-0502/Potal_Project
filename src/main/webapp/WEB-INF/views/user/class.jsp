@@ -134,6 +134,7 @@ window.onload = function () {
     
     let opened_win_01 = null;
     function fopen(proId) {
+    	console.log(proId); 
     	 opened_win_01 = window.open("message?proId=${proId}", "Message", "width=400, height=500, toolbar=yes");
     }
 }

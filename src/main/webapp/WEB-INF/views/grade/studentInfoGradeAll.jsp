@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 
 <head>
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 <style type="text/css">
 	h2{
@@ -98,18 +102,29 @@
     	color:rgb(051,051,102);
 	}
 	
-
+	#btn_open {
+		margin-bottom: 20px;
+		border-radius: 6px;
+		border: 0;
+	    color: #fff;
+	    background-color: #4e73df;
+	    margin-left: 830px;
+	}
+	
+	#btn_open:hover {
+		background-color: #224abe;
+	}
 	  
 </style>
 
 </head>
 <body>
-
+ <input type="hidden" value="${userId}" id="userId">
 	<br>
 	<h2 >학생조회</h2>
 	<div class="backPage" style="width:80vw;">
-		<a style="color: gray"> <i class="fas fa-graduation-cap"></i></a> > 학생선택 > 학생정보<br>
-		 
+		<a style="color: gray"> <i class="fas fa-graduation-cap"></i></a> > 학생선택 > 학생정보
+		 <button id="btn_open">메세지</button>
 	</div>
 	<br><br>
 	
@@ -117,7 +132,7 @@
 	<%-- 학번 : <br>
 	핸드폰 번호 : <br>
 	이메일 : <br> --%>
-	
+	<%-- <input type="hidden" value="${info.USER_ID}" id="userId"> --%>
 	<h3 id="infoH">학생정보<i style="margin-left: 10px;" class="fas fa-info"></i></h3><br>
 	<table class="infoTable">
 		<tbody class="infoBody">
@@ -128,7 +143,7 @@
 				<td>${info.USER_ID}</td>
 				<th class="thth">핸드폰 번호</th>
 				<td>${info.PHONE}</td>
-				 
+				
 			</tr>
 			<tr>
 				<th>이메일</th>
@@ -242,10 +257,23 @@
 	</table>
 
 
- 
+  
 </body>
 
 <script>
+	window.onload = function () {
+		 
+		var userId = document.getElementById("userId").value;
+		console.log(userId);
+		
+		$("#btn_open").click(msg);
+		 
+		let openMsg = null;
+		 
+		function msg(userId){ 
+			openMsg = window.open("messagePtoU?userId=${userId}", "Message", "width=400, height=500, toolbar=yes");
+		}		  
+	} 
 </script>
 
 </html>

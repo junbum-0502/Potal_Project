@@ -3,6 +3,7 @@ package com.jun.potal.grade.service;
 import java.util.List;
 
 import com.jun.potal.vo.Grade;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.User;
 
@@ -33,5 +34,9 @@ public interface GradeService {
 	List<Schedule> studentInfoGradeAllSchedule(Schedule schedule) throws Exception; // 수강 목록 조회
 	
 	List<Grade> selectScoreById(Grade grade) throws Exception;
+	
+	int sendMessagePtoU(Message msg) throws Exception; // 메세지 보내기
+	
+	List<Message> readMessagePtoU(Message msg) throws Exception; // 메세지 읽기
 	
 }

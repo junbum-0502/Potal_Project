@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.jun.potal.vo.Grade;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.User;
 
@@ -76,5 +77,15 @@ public class GradeDao {
 		
 		return sqlSession.selectList("Grade.studentInfoGradeAllSchedule",schedule);
 	}
+	
+	public List<Message> readMessagePtoU(Message msg)  throws Exception{
+		
+		return sqlSession.selectList("Grade.readMessagePtoU",msg);
+	}
+
+	public int sendMessagePtoU(Message msg) throws Exception{
+	
+	return sqlSession.insert("Grade.sendMessagePtoU",msg);
+}
 	
 }

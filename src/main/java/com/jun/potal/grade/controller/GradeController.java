@@ -11,9 +11,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.jun.potal.grade.service.GradeService;
 import com.jun.potal.vo.Grade;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.User;
 
@@ -334,8 +338,68 @@ public class GradeController {
 		model.addAttribute("uList",uList);
 		model.addAttribute("gList",gList);
 		model.addAttribute("sList",sList);
+		model.addAttribute("userId",userId);
 		
 		return "grade/studentInfoGradeAll";
+	}
+	
+	@GetMapping("messagePtoU")
+	public String messagePtoU(HttpServletRequest request, Model model) throws Exception {
+		
+		String userId = request.getParameter("userId");
+		System.out.println("msgId : " + userId);
+		model.addAttribute("userId", userId);
+		
+		return "grade/message";
+	}
+	
+	@PostMapping(value = "readMessagePtoU", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String readMessagePtoU(HttpServletRequest request,Message msg) throws Exception{
+		
+		String userId = request.getParameter("userId");
+		String proId = request.getParameter("proId");
+		System.out.println("id는 : " + userId);
+		System.out.println("proId는 : " + proId);
+		msg.setUserId(Integer.valueOf(userId));
+		msg.setrId(Integer.valueOf(proId));
+		
+		// 메세지 출력
+		List<Message> mList = gradeService.readMessagePtoU(msg);
+		System.out.println("메세지 리스트 : " + mList);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(mList);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		return jsonOutput;
+
+	}
+	
+	@PostMapping(value = "sendMessagePtoU", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String sendMessagePtoU(HttpServletRequest request,Message msg) throws Exception{
+		
+		String userId = request.getParameter("userId");
+		String content = request.getParameter("content");
+		String proId = request.getParameter("proId");
+		System.out.println("id는 : " + userId);
+		System.out.println("content는 : " + content);
+		System.out.println("proId는 : " + proId);
+		msg.setUserId(Integer.valueOf(proId));
+		msg.setContent(content);
+		msg.setrId(Integer.valueOf(userId));
+	
+		// 메세지 전송
+		int Message = gradeService.sendMessagePtoU(msg);
+		System.out.println("메세지 전송 상태 : " + Message);
+		
+		// 메세지 출력
+		List<Message> list = gradeService.readMessagePtoU(msg);
+		System.out.println("메세지 리스트 : " + list);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create(); // Gson 사용
+		String jsonOutput = gson.toJson(list);
+		System.out.println("jsonOutput : "+ jsonOutput);
+		return jsonOutput;
+		
 	}
 	
 }

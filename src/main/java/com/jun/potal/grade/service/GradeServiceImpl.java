@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.jun.potal.grade.dao.GradeDao;
 import com.jun.potal.vo.Grade;
+import com.jun.potal.vo.Message;
 import com.jun.potal.vo.Schedule;
 import com.jun.potal.vo.User;
 
@@ -90,6 +91,18 @@ public class GradeServiceImpl implements GradeService{
 	public List<Grade> selectScoreById(Grade grade) throws Exception {
 		// TODO Auto-generated method stub
 		return gradeDao.selectScoreById(grade);
+	}
+
+	@Override 
+	public int sendMessagePtoU(Message msg) throws Exception {
+		// 메세지 보내기
+		return gradeDao.sendMessagePtoU(msg);
+	}
+
+	@Override
+	public List<Message> readMessagePtoU(Message msg) throws Exception {
+		 // 메세지 읽기
+		return gradeDao.readMessagePtoU(msg); 
 	}
 
 
