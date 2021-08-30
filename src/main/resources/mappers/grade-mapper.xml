@@ -99,7 +99,7 @@
 	</select>
 	
 	<select id="readMessagePtoU" resultType="map">
-	SELECT USER_ID, R_ID, CONTENT, TO_CHAR(REGDATE, 'YYYY/MM/DD HH24:MI') AS REGDATE FROM MESSAGE WHERE (USER_ID = #{userId} AND R_ID = #{rId}) OR (USER_ID = #{rId} AND R_ID = #{userId}) ORDER BY REGDATE ASC
+	SELECT USER_ID, R_ID, CONTENT, TO_CHAR(REGDATE, 'YYYY/MM/DD HH24:MI') AS REGDATE FROM MESSAGE WHERE (USER_ID = #{userId} AND R_ID = #{rId}) OR (USER_ID = #{rId} AND R_ID = #{userId}) ORDER BY M_IDX ASC
 	</select>
 	
 	<insert id="sendMessagePtoU">
